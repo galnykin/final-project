@@ -2,6 +2,7 @@ package ru.kupibilet.ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class LoginModal {
     private WebDriver driver;
@@ -11,6 +12,8 @@ public class LoginModal {
     private By signInButton = By.cssSelector("[data-testid='sign-in-button']");
     private By registerLink = By.linkText("Регистрация");
     private By forgotPasswordLink = By.linkText("Забыли пароль?");
+    private By errorMessage = By.cssSelector("span.sc-qyqger-0.gUhGbX");
+
 
     public LoginModal(WebDriver driver) {
         this.driver = driver;
@@ -34,5 +37,13 @@ public class LoginModal {
 
     public void clickForgotPasswordLink() {
         driver.findElement(forgotPasswordLink).click();
+    }
+
+    public WebElement getErrorMessageElement() {
+        return driver.findElement(errorMessage);
+    }
+
+    public String getErrorMessageText() {
+        return driver.findElement(errorMessage).getText();
     }
 }
