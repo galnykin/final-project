@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class HomePage {
     private WebDriver driver;
 
-    private By loginButton = By.id("account-init-button");
+    private By loginButton = By.cssSelector("[data-testid='open-auth-modal-button']");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
