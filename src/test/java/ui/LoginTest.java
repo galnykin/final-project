@@ -1,19 +1,17 @@
 package ui;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
 import ru.kupibilet.ui.drivers.DriverFactory;
 import ru.kupibilet.ui.pages.HomePage;
 import ru.kupibilet.ui.pages.LoginModal;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import ru.kupibilet.ui.utils.WaitUtils;
 
-import java.time.Duration;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginTest {
     private WebDriver driver;
@@ -45,9 +43,7 @@ public class LoginTest {
         loginModal.clickSignIn();
 
         By errorLocator = By.cssSelector("span.sc-qyqger-0.gUhGbX");
-
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(errorLocator));
+        WaitUtils.waitForVisibility(driver, errorLocator);
 
         assertEquals("Вы ошиблись в почте или пароле", loginModal.getErrorMessageText());
     }
