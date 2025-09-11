@@ -13,7 +13,7 @@ public class WaitUtils {
     private static final int DEFAULT_TIMEOUT = 10;
 
     public static WebElement waitForVisibility(WebDriver driver, By errorLocator) {
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
+        return new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
                 .until(ExpectedConditions.visibilityOfElementLocated(errorLocator));
     }
 }
