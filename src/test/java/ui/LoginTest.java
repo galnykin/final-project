@@ -1,6 +1,7 @@
 package ui;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import ru.kupibilet.ui.pages.HomePage;
@@ -22,6 +23,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Успешный вход с корректными данными")
     public void testLoginFlow() {
         homePage.clickLoginButton();
         loginModal.enterEmail(ConfigReader.get("valid.email"));
@@ -30,6 +32,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Ошибка при входе с неверными данными")
     public void testInvalidLoginShowsErrorMessage() {
         homePage.clickLoginButton();
         loginModal.enterEmail(ConfigReader.get("invalid.email"));
