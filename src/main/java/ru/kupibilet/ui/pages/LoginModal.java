@@ -27,7 +27,7 @@ public class LoginModal {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    public void clickSignIn() {
+    public void clickSubmit() {
         driver.findElement(signInButton).click();
     }
 
