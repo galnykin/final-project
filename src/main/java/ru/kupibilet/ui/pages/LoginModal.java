@@ -12,11 +12,8 @@ public class LoginModal {
     private By signInButton = By.cssSelector("[data-testid='sign-in-button']");
     private By registerLink = By.linkText("Регистрация");
     private By forgotPasswordLink = By.linkText("Забыли пароль?");
-    private By generalErrorMessage = By.cssSelector("span.sc-qyqger-0.gUhGbX");
-    private By emailErrorMessage = By.cssSelector("""
-            div:has(input[data-testid="email-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
-    private By passwordErrorMessage = By.cssSelector("""
-            div:has(input[data-testid="password-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
+    private By errorMessage = By.cssSelector("span.sc-qyqger-0.gUhGbX");
+
 
     public LoginModal(WebDriver driver) {
         this.driver = driver;
@@ -43,30 +40,10 @@ public class LoginModal {
     }
 
     public WebElement getErrorMessageElement() {
-        return driver.findElement(generalErrorMessage);
+        return driver.findElement(errorMessage);
     }
 
-    public String getGeneralErrorMessageText() {
-        return driver.findElement(generalErrorMessage).getText();
-    }
-
-    public String getEmailErrorMessageText() {
-        return driver.findElement(emailErrorMessage).getText();
-    }
-
-    public String getPasswordErrorMessageText() {
-        return driver.findElement(passwordErrorMessage).getText();
-    }
-
-    public By getPasswordErrorMessageLocator() {
-        return passwordErrorMessage;
-    }
-
-    public By getEmailErrorMessageLocator() {
-        return emailErrorMessage;
-    }
-
-    public By getGeneralErrorMessageLocator() {
-        return generalErrorMessage;
+    public String getErrorMessageText() {
+        return driver.findElement(errorMessage).getText();
     }
 }
