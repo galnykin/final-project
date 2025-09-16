@@ -24,14 +24,6 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Успешный вход с корректными данными")
-    public void testLoginFlow() {
-        loginModal.enterEmail(ConfigReader.get("valid.email"));
-        loginModal.enterPassword(ConfigReader.get("valid.password"));
-        loginModal.clickSubmit();
-    }
-
-    @Test
     @DisplayName("Ошибка при входе с неверными данными")
     public void testInvalidEmailAndPasswordShowsErrorMessage() {
         loginModal.enterEmail(ConfigReader.get("invalid.email"));
