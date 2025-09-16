@@ -3,6 +3,8 @@ package ui;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.kupibilet.ui.pages.HomePage;
 import ru.kupibilet.ui.pages.LoginModal;
 import ru.kupibilet.ui.utils.ConfigReader;
@@ -13,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginTest extends BaseTest {
 
+    private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
     private HomePage homePage;
     private LoginModal loginModal;
 
@@ -29,6 +32,8 @@ public class LoginTest extends BaseTest {
         loginModal.enterEmail(ConfigReader.get("valid.email"));
         loginModal.enterPassword(ConfigReader.get("valid.password"));
         loginModal.clickSubmit();
+
+        // TODO: Добавить проверку успешного входа
     }
 
     @Test
