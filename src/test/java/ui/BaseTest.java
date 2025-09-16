@@ -3,7 +3,7 @@ package ui;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import ru.kupibilet.ui.drivers.DriverFactory;
+import ru.kupibilet.ui.drivers.DriverManager;
 import ru.kupibilet.ui.utils.ConfigReader;
 
 public abstract class BaseTest {
@@ -11,13 +11,12 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        driver = DriverFactory.getDriver();
-        driver.manage().window().maximize();
+        driver = DriverManager.getDriver();
         driver.get(ConfigReader.get("base.url"));
     }
 
     @AfterEach
     public void tearDown() {
-        DriverFactory.quitDriver();
+        DriverManager.quitDriver();
     }
 }
