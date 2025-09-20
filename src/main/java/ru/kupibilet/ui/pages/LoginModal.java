@@ -4,69 +4,59 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginModal {
-    private WebDriver driver;
+import static ru.kupibilet.ui.locators.LoginModalLocators.*;
 
-    private By emailField = By.cssSelector("[data-testid='email-input']");
-    private By passwordField = By.cssSelector("[data-testid='password-input']");
-    private By signInButton = By.cssSelector("[data-testid='sign-in-button']");
-    private By registerLink = By.linkText("Регистрация");
-    private By forgotPasswordLink = By.linkText("Забыли пароль?");
-    private By generalErrorMessage = By.cssSelector("span.sc-qyqger-0.gUhGbX");
-    private By emailErrorMessage = By.cssSelector("""
-            div:has(input[data-testid="email-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
-    private By passwordErrorMessage = By.cssSelector("""
-            div:has(input[data-testid="password-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
+public class LoginModal extends BasePage {
 
     public LoginModal(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void enterEmail(String email) {
-        driver.findElement(emailField).sendKeys(email);
+        type(EMAIL_FIELD, email);
     }
 
     public void enterPassword(String password) {
-        driver.findElement(passwordField).sendKeys(password);
+        type(PASSWORD_FIELD, password);
     }
 
     public void clickSubmit() {
-        driver.findElement(signInButton).click();
+        click(SIGN_IN_BUTTON);
     }
 
     public void clickRegisterLink() {
-        driver.findElement(registerLink).click();
+        click(REGISTER_LINK);
     }
 
     public void clickForgotPasswordLink() {
-        driver.findElement(forgotPasswordLink).click();
+        click(FORGOT_PASSWORD_LINK);
     }
 
     public WebElement getErrorMessageElement() {
-        return driver.findElement(generalErrorMessage);
+        return find(GENERAL_ERROR_MESSAGE);
     }
 
     public String getGeneralErrorMessageText() {
-        return driver.findElement(generalErrorMessage).getText();
+        return getText(GENERAL_ERROR_MESSAGE);
     }
 
     public String getEmailErrorMessageText() {
-        return driver.findElement(emailErrorMessage).getText();
+        return getText(EMAIL_ERROR_MESSAGE);
     }
 
     public String getPasswordErrorMessageText() {
-        return driver.findElement(passwordErrorMessage).getText();
+        return getText(PASSWORD_ERROR_MESSAGE);
     }
 
     public By getPasswordErrorMessageLocator() {
-        return passwordErrorMessage;
+        return PASSWORD_ERROR_MESSAGE;
     }
 
     public By getEmailErrorMessageLocator() {
-        return emailErrorMessage;
+        return EMAIL_ERROR_MESSAGE;
     }
 
     public By getGeneralErrorMessageLocator() {
-        return generalErrorMessage;
+        return GENERAL_ERROR_MESSAGE;
     }
 }
