@@ -1,4 +1,4 @@
-package ui;
+package ru.kupibilet.ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
