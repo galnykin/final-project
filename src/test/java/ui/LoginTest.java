@@ -10,8 +10,8 @@ import ru.kupibilet.ui.utils.WaitUtils;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.kupibilet.ui.locators.LoginModalLocators.EMAIL_ERROR_MESSAGE;
 import static ru.kupibilet.ui.locators.LoginModalLocators.GENERAL_ERROR_MESSAGE;
+import static ru.kupibilet.ui.locators.LoginModalLocators.EMAIL_ERROR_MESSAGE;
 import static ru.kupibilet.ui.locators.LoginModalLocators.PASSWORD_ERROR_MESSAGE;
 
 public class LoginTest extends BaseTest {
