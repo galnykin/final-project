@@ -10,6 +10,9 @@ import ru.kupibilet.ui.utils.WaitUtils;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static ru.kupibilet.ui.locators.LoginModalLocators.EMAIL_ERROR_MESSAGE;
+import static ru.kupibilet.ui.locators.LoginModalLocators.GENERAL_ERROR_MESSAGE;
+import static ru.kupibilet.ui.locators.LoginModalLocators.PASSWORD_ERROR_MESSAGE;
 
 public class LoginTest extends BaseTest {
 
@@ -30,8 +33,9 @@ public class LoginTest extends BaseTest {
         loginModal.enterPassword(ConfigReader.get("invalid.password"));
         loginModal.clickSubmit();
 
-        WaitUtils.waitForVisibility(driver, loginModal.getGeneralErrorMessageLocator());
-        assertEquals("Вы ошиблись в почте или пароле", loginModal.getGeneralErrorMessageText());
+        WaitUtils.waitForVisibility(driver, GENERAL_ERROR_MESSAGE);
+        assertEquals("Вы ошиблись в почте или пароле", loginModal.getText(GENERAL_ERROR_MESSAGE));
+
     }
 
     @Test
@@ -39,11 +43,11 @@ public class LoginTest extends BaseTest {
     public void testEmptyEmailAndPasswordShowErrorMessages() {
         loginModal.clickSubmit();
 
-        WaitUtils.waitForVisibility(driver, loginModal.getEmailErrorMessageLocator());
-        WaitUtils.waitForVisibility(driver, loginModal.getPasswordErrorMessageLocator());
+        WaitUtils.waitForVisibility(driver, EMAIL_ERROR_MESSAGE);
+        WaitUtils.waitForVisibility(driver, PASSWORD_ERROR_MESSAGE);
         assertAll(
-                () -> assertEquals("Введите вашу электронную почту", loginModal.getEmailErrorMessageText()),
-                () -> assertEquals("Введите ваш пароль", loginModal.getPasswordErrorMessageText())
+                () -> assertEquals("Введите вашу электронную почту", loginModal.getText(EMAIL_ERROR_MESSAGE)),
+                () -> assertEquals("Введите ваш пароль", loginModal.getText(PASSWORD_ERROR_MESSAGE))
         );
     }
 
@@ -54,7 +58,7 @@ public class LoginTest extends BaseTest {
         loginModal.enterPassword(ConfigReader.get("invalid.password"));
         loginModal.clickSubmit();
 
-        WaitUtils.waitForVisibility(driver, loginModal.getEmailErrorMessageLocator());
-        assertEquals("Неверный формат электронной почты", loginModal.getEmailErrorMessageText());
+        WaitUtils.waitForVisibility(driver, EMAIL_ERROR_MESSAGE);
+        assertEquals("Неверный формат электронной почты", loginModal.getText(EMAIL_ERROR_MESSAGE));
     }
 }
