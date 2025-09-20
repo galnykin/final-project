@@ -1,4 +1,4 @@
-package ru.kupibilet.ui;
+package ui;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
