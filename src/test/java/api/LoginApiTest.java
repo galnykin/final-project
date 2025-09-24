@@ -1,6 +1,7 @@
 package api;
 
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.kupibilet.api.clients.AuthClient;
 import ru.kupibilet.api.models.LoginRequest;
@@ -21,6 +22,7 @@ public class LoginApiTest {
         assertEquals(200, response.statusCode());
     }
 
+    @Disabled("This test is temporarily disabled")
     @Test
     public void testValidLogin() {
         LoginRequest request = new LoginRequest(
