@@ -3,6 +3,8 @@ package ru.kupibilet.ui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static ru.kupibilet.ui.locators.LoginModalLocators.*;
 
@@ -13,14 +15,17 @@ public class LoginModal extends BasePage {
     }
 
     public void enterEmail(String email) {
+        log.info("Ввод email");
         type(EMAIL_FIELD, email);
     }
 
     public void enterPassword(String password) {
+        log.info("Ввод пароля");
         type(PASSWORD_FIELD, password);
     }
 
     public void clickSubmit() {
+        log.info("Нажатие на кнопку входа");
         click(SIGN_IN_BUTTON);
     }
 
