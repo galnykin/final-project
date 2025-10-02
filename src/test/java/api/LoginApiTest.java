@@ -1,7 +1,15 @@
 package api;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.kupibilet.api.clients.AuthClient;
 import ru.kupibilet.api.models.LoginRequest;
@@ -9,8 +17,16 @@ import ru.kupibilet.ui.utils.ConfigReader;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Epic("Авторизация")
+@Feature("API вход")
+@Tag("api")
+@Owner("sergey")
 public class LoginApiTest {
+
+    @Story("Негативный сценарий: неверные email и pass")
+    @Severity(SeverityLevel.NORMAL)
     @Test
+    @DisplayName("API: Ошибка при входе с неверными данными (ожидается 200)")
     public void testInvalidLoginReturns200() {
 
         LoginRequest request = new LoginRequest(
@@ -22,8 +38,13 @@ public class LoginApiTest {
         assertEquals(200, response.statusCode());
     }
 
+    @Story("Позитивный сценарий: успешный вход")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("sergey")
+    @Tag("api")
     @Disabled("This test is temporarily disabled")
     @Test
+    @DisplayName("API: Успешный вход с валидными данными")
     public void testValidLogin() {
         LoginRequest request = new LoginRequest(
                 ConfigReader.get("valid.email"),
