@@ -21,6 +21,10 @@ import static ru.kupibilet.ui.locators.LoginModalLocators.GENERAL_ERROR_MESSAGE;
 import static ru.kupibilet.ui.locators.LoginModalLocators.EMAIL_ERROR_MESSAGE;
 import static ru.kupibilet.ui.locators.LoginModalLocators.PASSWORD_ERROR_MESSAGE;
 
+@Epic("Авторизация")
+@Feature("Модальное окно входа")
+@Owner("sergey")
+@Tag("ui")
 public class LoginTest extends BaseTest {
 
     private HomePage homePage;
@@ -33,14 +37,8 @@ public class LoginTest extends BaseTest {
         homePage.clickLoginButton();
     }
 
-    @Epic("Авторизация")
-    @Feature("Модальное окно входа")
     @Story("Негативный сценарий: неверные данные email и pass")
-
     @Severity(SeverityLevel.CRITICAL)
-    @Owner("sergey")
-    @Tag("ui")
-
     @Test
     @DisplayName("Ошибка при входе с неверными данными")
 
@@ -53,14 +51,8 @@ public class LoginTest extends BaseTest {
         assertEquals("Вы ошиблись в почте или пароле", loginModal.getText(GENERAL_ERROR_MESSAGE));
     }
 
-    @Epic("Авторизация")
-    @Feature("Модальное окно входа")
     @Story("Негативный сценарий: пустые поля")
-
     @Severity(SeverityLevel.NORMAL)
-    @Owner("sergey")
-    @Tag("ui")
-
     @Test
     @DisplayName("Ошибка при пустых полях email и password")
     public void testEmptyEmailAndPasswordShowErrorMessages() {
@@ -74,14 +66,8 @@ public class LoginTest extends BaseTest {
         );
     }
 
-    @Epic("Авторизация")
-    @Feature("Модальное окно входа")
     @Story("Негативный сценарий: неверный формат email")
-
     @Severity(SeverityLevel.NORMAL)
-    @Owner("sergey")
-    @Tag("ui")
-
     @Test
     @DisplayName("Ошибка при вводе email в неверном формате")
     public void testInvalidEmailFormatShowsErrorMessage() {
