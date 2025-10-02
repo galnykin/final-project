@@ -1,7 +1,14 @@
 package ui;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.kupibilet.ui.pages.HomePage;
 import ru.kupibilet.ui.pages.LoginModal;
@@ -26,8 +33,17 @@ public class LoginTest extends BaseTest {
         homePage.clickLoginButton();
     }
 
+    @Epic("Авторизация")
+    @Feature("Модальное окно входа")
+    @Story("Негативный сценарий: неверные данные email и pass")
+
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("sergey")
+    @Tag("ui")
+
     @Test
     @DisplayName("Ошибка при входе с неверными данными")
+
     public void testInvalidEmailAndPasswordShowsErrorMessage() {
         loginModal.enterEmail(ConfigReader.get("invalid.email"));
         loginModal.enterPassword(ConfigReader.get("invalid.password"));
@@ -35,8 +51,15 @@ public class LoginTest extends BaseTest {
 
         WaitUtils.waitForVisibility(driver, GENERAL_ERROR_MESSAGE);
         assertEquals("Вы ошиблись в почте или пароле", loginModal.getText(GENERAL_ERROR_MESSAGE));
-
     }
+
+    @Epic("Авторизация")
+    @Feature("Модальное окно входа")
+    @Story("Негативный сценарий: пустые поля")
+
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("sergey")
+    @Tag("ui")
 
     @Test
     @DisplayName("Ошибка при пустых полях email и password")
@@ -50,6 +73,14 @@ public class LoginTest extends BaseTest {
                 () -> assertEquals("Введите ваш пароль", loginModal.getText(PASSWORD_ERROR_MESSAGE))
         );
     }
+
+    @Epic("Авторизация")
+    @Feature("Модальное окно входа")
+    @Story("Негативный сценарий: неверный формат email")
+
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("sergey")
+    @Tag("ui")
 
     @Test
     @DisplayName("Ошибка при вводе email в неверном формате")
