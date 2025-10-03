@@ -13,6 +13,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <slf4j.version>2.0.17</slf4j.version>
         <log4j.version>2.25.2</log4j.version>
         <allure.version>2.30.0</allure.version>
         <aspectj.version>1.9.24</aspectj.version>
@@ -60,14 +61,14 @@
             <version>6.3.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <!-- Rest Assured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.5.6</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <!-- Assertj Core -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -75,14 +76,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <!-- SLF4J API -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.17</version>
+            <version>${slf4j.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl -->
+        <!-- Log4j2 SLF4J Binding -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j2-impl</artifactId>
@@ -90,18 +91,20 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+        <!-- Log4j2 API -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Log4j2 Core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
