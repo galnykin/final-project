@@ -18,16 +18,14 @@ pipeline {
                 allure([
                     includeProperties: false,
                     jdk: '',
-                    results: [[path: 'target\\allure-results']],
-                    reportBuildPolicy: 'ALWAYS'
+                    results: [[path: 'target\\allure-results']]
                 ])
-                bat 'allure generate target\\allure-results -o target\\allure-report'
             }
         }
 
         stage('Archive Report') {
             steps {
-                archiveArtifacts artifacts: 'target\\allure-report\\**', fingerprint: true
+                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
             }
         }
     }
