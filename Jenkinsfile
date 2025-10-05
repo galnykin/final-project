@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build & Test') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
 
@@ -18,14 +18,14 @@ pipeline {
                 allure([
                     includeProperties: false,
                     jdk: '',
-                    results: [[path: 'target/allure-results']]
+                    results: [[path: 'target\\allure-results']]
                 ])
             }
         }
 
         stage('Archive Report') {
             steps {
-                archiveArtifacts artifacts: 'target/allure-report/**', fingerprint: true
+                archiveArtifacts artifacts: 'target\\allure-report\\**', fingerprint: true
             }
         }
     }
