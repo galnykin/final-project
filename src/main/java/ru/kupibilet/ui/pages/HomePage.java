@@ -11,7 +11,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickLoginButton() {
-        log.info("Нажатие кнопки Login");
+        log.info("Clicking the Login button [{}]", LOGIN_BUTTON);
         click(LOGIN_BUTTON);
     }
 }

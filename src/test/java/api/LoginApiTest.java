@@ -21,20 +21,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Feature("API вход")
 @Tag("api")
 @Owner("sergey")
-public class LoginApiTest {
+public class LoginApiTest extends BaseApiClient {
 
     @Story("Негативный сценарий: неверные email и pass")
     @Severity(SeverityLevel.NORMAL)
     @Test
     @DisplayName("API: Ошибка при входе с неверными данными (ожидается 200)")
     public void testInvalidLoginReturns200() {
+        String email = ConfigReader.get("invalid.email");
+        String password = ConfigReader.get("invalid.password");
 
-        LoginRequest request = new LoginRequest(
-                ConfigReader.get("invalid.email"),
-                ConfigReader.get("invalid.password"));
+        logger.info("Sending login request with email='{}' and invalid password", email);
+        LoginRequest request = new LoginRequest(email, password);
 
         var response = AuthClient.login(request);
 
+        logger.info("Received response: status={}, body={}", response.statusCode(), response.body().asString());
         assertEquals(200, response.statusCode());
     }
 
