@@ -25,7 +25,6 @@ pipeline {
             }
         }
 
-
         stage('Archive Report') {
             steps {
                 archiveArtifacts artifacts: 'target\\allure-report\\**', fingerprint: true
