@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO">
     <Appenders>
-        <File name="UIFile" fileName="logs/ui.log">
-            <PatternLayout pattern="%d{HH:mm:ss} %-5level [%logger] - %msg%n"/>
-        </File>
-        <File name="APIFile" fileName="logs/api.log">
-            <PatternLayout pattern="%d{HH:mm:ss} %-5level [%logger] - %msg%n"/>
-        </File>
+        <!-- Console output -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss} %-5level [%logger] - %msg%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
         </Console>
+
+        <!-- UI log file -->
+        <File name="UIFile" fileName="logs/ui.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
+
+        <!-- API log file -->
+        <File name="APIFile" fileName="logs/api.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
     </Appenders>
 
     <Loggers>
+        <!-- UI logger -->
         <Logger name="ru.kupibilet.ui" level="info" additivity="false">
             <AppenderRef ref="UIFile"/>
+            <AppenderRef ref="Console"/>
         </Logger>
 
+        <!-- API logger -->
         <Logger name="ru.kupibilet.api" level="info" additivity="false">
             <AppenderRef ref="APIFile"/>
+            <AppenderRef ref="Console"/>
         </Logger>
 
-        <Root level="warn">
+        <!-- Root logger -->
+        <Root level="info">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>

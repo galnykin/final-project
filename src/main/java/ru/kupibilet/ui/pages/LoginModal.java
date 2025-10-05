@@ -3,8 +3,6 @@ package ru.kupibilet.ui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static ru.kupibilet.ui.locators.LoginModalLocators.*;
 
@@ -15,17 +13,19 @@ public class LoginModal extends BasePage {
     }
 
     public void enterEmail(String email) {
-        log.info("Ввод email");
+        log.info("Typing email: '{}'", email);
         type(EMAIL_FIELD, email);
     }
 
     public void enterPassword(String password) {
-        log.info("Ввод пароля");
+        log.info("Typing password");
         type(PASSWORD_FIELD, password);
     }
 
     public void clickSubmit() {
-        log.info("Нажатие на кнопку входа");
+        if (log.isInfoEnabled()) {
+            log.info("Clicking Sign In button [{}]", SIGN_IN_BUTTON);
+        }
         click(SIGN_IN_BUTTON);
     }
 
@@ -42,7 +42,9 @@ public class LoginModal extends BasePage {
     }
 
     public String getGeneralErrorMessageText() {
-        return getText(GENERAL_ERROR_MESSAGE);
+        String message = getText(GENERAL_ERROR_MESSAGE);
+        log.info("General error message: '{}'", message);
+        return message;
     }
 
     public String getEmailErrorMessageText() {
