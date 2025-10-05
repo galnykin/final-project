@@ -18,8 +18,10 @@ pipeline {
                 allure([
                     includeProperties: false,
                     jdk: '',
-                    results: [[path: 'target\\allure-results']]
+                    results: [[path: 'target\\allure-results']],
+                    reportBuildPolicy: 'ALWAYS'
                 ])
+                bat 'allure generate target\\allure-results -o target\\allure-report'
             }
         }
 
