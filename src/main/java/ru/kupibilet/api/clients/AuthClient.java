@@ -13,7 +13,7 @@ public class AuthClient {
     private static final Logger log = LoggerFactory.getLogger(AuthClient.class);
 
     public static Response login(LoginRequest request) {
-        log.info("Sending authorization request for email: {}", request.email);
+        log.info("Sending authorization request for email: {}", request.getEmail());
         return given()
                 .contentType("application/json")
                 .body(request)
