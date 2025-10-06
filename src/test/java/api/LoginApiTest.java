@@ -6,8 +6,6 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -38,35 +36,5 @@ public class LoginApiTest extends BaseApiClient {
 
         logger.info("Received response: status={}, body={}", response.statusCode(), response.body().asString());
         assertEquals(200, response.statusCode());
-    }
-
-    @Story("Positive scenario: successful login")
-    @Severity(SeverityLevel.CRITICAL)
-    @Owner("sergey")
-    @Tag("api")
-    @Disabled("This test is temporarily disabled")
-    @Test
-    @DisplayName("API: Successful login with valid credentials")
-    public void testValidLogin() {
-        LoginRequest request = new LoginRequest(
-                ConfigReader.get("valid.email"),
-                ConfigReader.get("valid.password"),
-                ConfigReader.get("valid.version"));
-
-        var response = AuthClient.login(request);
-
-        SoftAssertions softly = new SoftAssertions();
-
-        assertEquals(200, response.statusCode());
-
-        String accountId = response.jsonPath().getString("data.account_id");
-        softly.assertThat(accountId).isEqualTo(ConfigReader.get("valid.account_id"));
-
-        String authToken = response.jsonPath().getString("data.auth_token");
-        softly.assertThat(authToken)
-                .withFailMessage("auth_token должен быть в ответе")
-                .isNotEmpty();
-
-        softly.assertAll();
     }
 }
