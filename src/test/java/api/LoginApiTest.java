@@ -17,16 +17,16 @@ import ru.kupibilet.ui.utils.ConfigReader;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Epic("Авторизация")
-@Feature("API вход")
+@Epic("Authorization")
+@Feature("API Login")
 @Tag("api")
 @Owner("sergey")
 public class LoginApiTest extends BaseApiClient {
 
-    @Story("Негативный сценарий: неверные email и pass")
+    @Story("Negative scenario: incorrect email and password")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @DisplayName("API: Ошибка при входе с неверными данными (ожидается 200)")
+    @DisplayName("API: Error when logging in with invalid credentials (expected 200)")
     public void testInvalidLoginReturns200() {
         String email = ConfigReader.get("invalid.email");
         String password = ConfigReader.get("invalid.password");
@@ -40,13 +40,13 @@ public class LoginApiTest extends BaseApiClient {
         assertEquals(200, response.statusCode());
     }
 
-    @Story("Позитивный сценарий: успешный вход")
+    @Story("Positive scenario: successful login")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("sergey")
     @Tag("api")
     @Disabled("This test is temporarily disabled")
     @Test
-    @DisplayName("API: Успешный вход с валидными данными")
+    @DisplayName("API: Successful login with valid credentials")
     public void testValidLogin() {
         LoginRequest request = new LoginRequest(
                 ConfigReader.get("valid.email"),

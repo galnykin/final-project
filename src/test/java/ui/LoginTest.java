@@ -21,8 +21,8 @@ import static ru.kupibilet.ui.locators.LoginModalLocators.GENERAL_ERROR_MESSAGE;
 import static ru.kupibilet.ui.locators.LoginModalLocators.EMAIL_ERROR_MESSAGE;
 import static ru.kupibilet.ui.locators.LoginModalLocators.PASSWORD_ERROR_MESSAGE;
 
-@Epic("Авторизация")
-@Feature("Модальное окно входа")
+@Epic("Authorization")
+@Feature("Login Modal Window")
 @Owner("sergey")
 @Tag("ui")
 public class LoginTest extends BaseTest {
@@ -39,10 +39,10 @@ public class LoginTest extends BaseTest {
         homePage.clickLoginButton();
     }
 
-    @Story("Негативный сценарий: неверные данные email и pass")
+    @Story("Negative scenario: incorrect email and password")
     @Severity(SeverityLevel.CRITICAL)
     @Test
-    @DisplayName("Ошибка при входе с неверными данными")
+    @DisplayName("Error when logging in with invalid credentials")
     public void testInvalidEmailAndPasswordShowsErrorMessage() {
         logger.info("Entering invalid credentials");
         loginModal.enterEmail(ConfigReader.get("invalid.email"));
@@ -56,10 +56,10 @@ public class LoginTest extends BaseTest {
         assertEquals("Вы ошиблись в почте или пароле", loginModal.getText(GENERAL_ERROR_MESSAGE));
     }
 
-    @Story("Негативный сценарий: пустые поля")
+    @Story("Negative scenario: empty fields")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @DisplayName("Ошибка при пустых полях email и password")
+    @DisplayName("Error when email and password fields are empty")
     public void testEmptyEmailAndPasswordShowErrorMessages() {
         logger.info("Submitting login form with empty fields");
         loginModal.clickSubmit();
@@ -75,10 +75,10 @@ public class LoginTest extends BaseTest {
         );
     }
 
-    @Story("Негативный сценарий: неверный формат email")
+    @Story("Negative scenario: invalid email format")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    @DisplayName("Ошибка при вводе email в неверном формате")
+    @DisplayName("Error when email format is invalid")
     public void testInvalidEmailFormatShowsErrorMessage() {
         logger.info("Entering invalid email format");
         loginModal.enterEmail("test.email");
