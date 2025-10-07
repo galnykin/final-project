@@ -1,10 +1,12 @@
-package ru.kupibilet.ui.pages;
+package ru.kupibilet.ui.pages.app;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import static ru.kupibilet.ui.locators.HomePageLocators.LOGIN_BUTTON;
+import ru.kupibilet.ui.pages.base.BasePage;
 
 public class HomePage extends BasePage {
+
+    public static final By LOGIN_BUTTON = By.cssSelector("[data-testid='open-auth-modal-button']");
 
     public HomePage(WebDriver driver) {
         super(driver);
