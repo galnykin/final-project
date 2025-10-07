@@ -61,8 +61,8 @@ public class LoginModal extends BasePage {
         enterPassword(password);
     }
 
-    public void submitInvalidCredentials() {
-        Credentials credentials = TestCredentialsFactory.invalidCredentials();
+    public void submitValidUnregisteredCredentials() {
+        Credentials credentials = TestCredentialsFactory.validUnregisteredCredentials();
         log.info("Submitting login form with invalid credentials");
         submitCredentials(credentials);
     }

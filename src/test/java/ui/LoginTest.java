@@ -35,12 +35,12 @@ public class LoginTest extends BaseTest {
         loginModal = new LoginModal(driver);
     }
 
-    @Story("Negative scenario: incorrect email and password")
+    @Story("Negative scenario: login attempt with valid but unregistered credentials")
     @Severity(SeverityLevel.CRITICAL)
     @Test
-    @DisplayName("Error when logging in with invalid credentials")
-    public void testInvalidEmailAndPasswordShowsErrorMessage() {
-        loginModal.submitInvalidCredentials();
+    @DisplayName("Error when logging in with valid but unregistered credentials")
+    public void testUnregisteredUserLoginShowsErrorMessage() {
+        loginModal.submitValidUnregisteredCredentials();
         assertEquals(LoginModal.WRONG_EMAIL_OR_PASSWORD_MESSAGE, loginModal.getAuthErrorMessageText());
     }
 
