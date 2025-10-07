@@ -3,9 +3,10 @@ package ru.kupibilet.ui.pages.app;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.kupibilet.auth.testdata.TestCredentialsFactory;
 import ru.kupibilet.ui.pages.base.BasePage;
-import ru.kupibilet.ui.utils.ConfigReader;
 import ru.kupibilet.ui.utils.WaitUtils;
+import ru.kupibilet.auth.dto.Credentials;
 
 public class LoginModal extends BasePage {
 
@@ -16,7 +17,7 @@ public class LoginModal extends BasePage {
 
     private final By emailFieldLocator = By.cssSelector("[data-testid='email-input']");
     private final By passwordFieldLocator = By.cssSelector("[data-testid='password-input']");
-    private final By signInButtonLocator = By.cssSelector("[data-testid='sign-in-button']");
+    private final By submitButtonLocator = By.cssSelector("[data-testid='sign-in-button']");
     private final By registerLinkLocator = By.linkText("Регистрация");
     private final By forgotPasswordLinkLocator = By.linkText("Забыли пароль?");
     private final By authErrorMessageLocator = By.cssSelector("span.sc-qyqger-0.gUhGbX");
@@ -39,27 +40,37 @@ public class LoginModal extends BasePage {
         type(passwordFieldLocator, password);
     }
 
-    public void clickSignInButton() {
-        log.info("Clicking Sign In button [{}]", signInButtonLocator);
-        click(signInButtonLocator);
+    public void clickSubmitButton() {
+        log.info("Clicking Submit button [{}]", submitButtonLocator);
+        click(submitButtonLocator);
     }
 
     public void submitCredentials(String email, String password) {
         log.info("Submitting credentials for email='{}'", email);
+        fillOutLoginForm(email, password);
+        clickSubmitButton();
+    }
+
+    public void submitCredentials(Credentials credentials) {
+        fillOutLoginForm(credentials.getEmail(), credentials.getPassword());
+        clickSubmitButton();
+    }
+
+    private void fillOutLoginForm(String email, String password) {
         enterEmail(email);
         enterPassword(password);
-        clickSignInButton();
     }
 
     public void submitInvalidCredentials() {
+        Credentials credentials = TestCredentialsFactory.invalidCredentials();
         log.info("Submitting login form with invalid credentials");
-        submitCredentials(ConfigReader.get("invalid.email"), ConfigReader.get("invalid.password"));
+        submitCredentials(credentials);
     }
 
     public void submitInvalidEmailFormat() {
+        Credentials credentials = TestCredentialsFactory.invalidEmailFormat();
         log.info("Submitting login form with invalid email format");
-        String invalidEmailFormat = "test.email";
-        submitCredentials(invalidEmailFormat, ConfigReader.get("invalid.password"));
+        submitCredentials(credentials);
     }
 
     public void clickRegisterLink() {
