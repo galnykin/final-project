@@ -10,16 +10,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import ru.kupibilet.ui.pages.HomePage;
-import ru.kupibilet.ui.pages.LoginModal;
+import ru.kupibilet.ui.pages.app.HomePage;
+import ru.kupibilet.ui.pages.app.LoginModal;
 import ru.kupibilet.ui.utils.ConfigReader;
 import ru.kupibilet.ui.utils.WaitUtils;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.kupibilet.ui.locators.LoginModalLocators.GENERAL_ERROR_MESSAGE;
-import static ru.kupibilet.ui.locators.LoginModalLocators.EMAIL_ERROR_MESSAGE;
-import static ru.kupibilet.ui.locators.LoginModalLocators.PASSWORD_ERROR_MESSAGE;
+import static ru.kupibilet.ui.pages.app.LoginModal.GENERAL_ERROR_MESSAGE;
+import static ru.kupibilet.ui.pages.app.LoginModal.EMAIL_ERROR_MESSAGE;
+import static ru.kupibilet.ui.pages.app.LoginModal.PASSWORD_ERROR_MESSAGE;
 
 @Epic("Authorization")
 @Feature("Login Modal Window")
