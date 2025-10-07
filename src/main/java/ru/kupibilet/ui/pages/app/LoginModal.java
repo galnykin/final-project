@@ -4,9 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.kupibilet.ui.pages.base.BasePage;
+import ru.kupibilet.ui.utils.ConfigReader;
 import ru.kupibilet.ui.utils.WaitUtils;
 
 public class LoginModal extends BasePage {
+
+    public static final String WRONG_EMAIL_OR_PASSWORD_MESSAGE = "Вы ошиблись в почте или пароле";
+    public static final String EMAIL_REQUIRED_MESSAGE = "Введите вашу электронную почту";
+    public static final String PASSWORD_REQUIRED_MESSAGE = "Введите ваш пароль";
+    public static final String EMAIL_FORMAT_INVALID_MESSAGE = "Неверный формат электронной почты";
 
     private final By emailFieldLocator = By.cssSelector("[data-testid='email-input']");
     private final By passwordFieldLocator = By.cssSelector("[data-testid='password-input']");
@@ -33,11 +39,27 @@ public class LoginModal extends BasePage {
         type(passwordFieldLocator, password);
     }
 
-    public void clickSubmit() {
-        if (log.isInfoEnabled()) {
-            log.info("Clicking Sign In button [{}]", signInButtonLocator);
-        }
+    public void clickSignInButton() {
+        log.info("Clicking Sign In button [{}]", signInButtonLocator);
         click(signInButtonLocator);
+    }
+
+    public void submitCredentials(String email, String password) {
+        log.info("Submitting credentials for email='{}'", email);
+        enterEmail(email);
+        enterPassword(password);
+        clickSignInButton();
+    }
+
+    public void submitInvalidCredentials() {
+        log.info("Submitting login form with invalid credentials");
+        submitCredentials(ConfigReader.get("invalid.email"), ConfigReader.get("invalid.password"));
+    }
+
+    public void submitInvalidEmailFormat() {
+        log.info("Submitting login form with invalid email format");
+        String invalidEmailFormat = "test.email";
+        submitCredentials(invalidEmailFormat, ConfigReader.get("invalid.password"));
     }
 
     public void clickRegisterLink() {

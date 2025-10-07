@@ -10,6 +10,7 @@ public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         super(driver);
+        log.info("Initializing Home page");
     }
 
     public void clickLoginButton() {

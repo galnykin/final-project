@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.kupibilet.ui.pages.app.HomePage;
 import ru.kupibilet.ui.pages.app.LoginModal;
-import ru.kupibilet.ui.utils.ConfigReader;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,11 +27,12 @@ public class LoginTest extends BaseTest {
 
     @BeforeEach
     public void init() {
-        logger.info("Initializing page objects");
         homePage = new HomePage(driver);
-        loginModal = new LoginModal(driver);
-        logger.info("Opening login modal");
+        logger.info("Clicking login button on HomePage");
         homePage.clickLoginButton();
+
+        logger.info("Opening login modal");
+        loginModal = new LoginModal(driver);
     }
 
     @Story("Negative scenario: incorrect email and password")
@@ -40,13 +40,8 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Error when logging in with invalid credentials")
     public void testInvalidEmailAndPasswordShowsErrorMessage() {
-        logger.info("Entering invalid credentials");
-        loginModal.enterEmail(ConfigReader.get("invalid.email"));
-        loginModal.enterPassword(ConfigReader.get("invalid.password"));
-        logger.info("Submitting login form with invalid credentials");
-        loginModal.clickSubmit();
-
-        assertEquals("Вы ошиблись в почте или пароле", loginModal.getAuthErrorMessageText());
+        loginModal.submitInvalidCredentials();
+        assertEquals(LoginModal.WRONG_EMAIL_OR_PASSWORD_MESSAGE, loginModal.getAuthErrorMessageText());
     }
 
     @Story("Negative scenario: empty fields")
@@ -54,12 +49,10 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Error when email and password fields are empty")
     public void testEmptyEmailAndPasswordShowErrorMessages() {
-        logger.info("Submitting login form with empty fields");
-        loginModal.clickSubmit();
-
+        loginModal.clickSignInButton();
         assertAll(
-                () -> assertEquals("Введите вашу электронную почту", loginModal.getEmailErrorMessageText()),
-                () -> assertEquals("Введите ваш пароль", loginModal.getPasswordErrorMessageText())
+                () -> assertEquals(LoginModal.EMAIL_REQUIRED_MESSAGE, loginModal.getEmailErrorMessageText()),
+                () -> assertEquals(LoginModal.PASSWORD_REQUIRED_MESSAGE, loginModal.getPasswordErrorMessageText())
         );
     }
 
@@ -68,12 +61,7 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Error when email format is invalid")
     public void testInvalidEmailFormatShowsErrorMessage() {
-        logger.info("Entering invalid email format");
-        loginModal.enterEmail("test.email");
-        loginModal.enterPassword(ConfigReader.get("invalid.password"));
-        logger.info("Submitting login form with invalid email format");
-        loginModal.clickSubmit();
-
-        assertEquals("Неверный формат электронной почты", loginModal.getEmailErrorMessageText());
+        loginModal.submitInvalidEmailFormat();
+        assertEquals(LoginModal.EMAIL_FORMAT_INVALID_MESSAGE, loginModal.getEmailErrorMessageText());
     }
 }
