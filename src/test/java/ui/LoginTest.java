@@ -49,7 +49,7 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Error when email and password fields are empty")
     public void testEmptyEmailAndPasswordShowErrorMessages() {
-        loginModal.clickSignInButton();
+        loginModal.clickSubmitButton();
         assertAll(
                 () -> assertEquals(LoginModal.EMAIL_REQUIRED_MESSAGE, loginModal.getEmailErrorMessageText()),
                 () -> assertEquals(LoginModal.PASSWORD_REQUIRED_MESSAGE, loginModal.getPasswordErrorMessageText())
