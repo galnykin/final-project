@@ -13,13 +13,9 @@ import org.junit.jupiter.api.Test;
 import ru.kupibilet.ui.pages.app.HomePage;
 import ru.kupibilet.ui.pages.app.LoginModal;
 import ru.kupibilet.ui.utils.ConfigReader;
-import ru.kupibilet.ui.utils.WaitUtils;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.kupibilet.ui.pages.app.LoginModal.GENERAL_ERROR_MESSAGE;
-import static ru.kupibilet.ui.pages.app.LoginModal.EMAIL_ERROR_MESSAGE;
-import static ru.kupibilet.ui.pages.app.LoginModal.PASSWORD_ERROR_MESSAGE;
 
 @Epic("Authorization")
 @Feature("Login Modal Window")
@@ -50,10 +46,7 @@ public class LoginTest extends BaseTest {
         logger.info("Submitting login form with invalid credentials");
         loginModal.clickSubmit();
 
-        logger.info("Waiting for general error message");
-        WaitUtils.waitForVisibility(driver, GENERAL_ERROR_MESSAGE);
-        logger.info("Verifying general error message text");
-        assertEquals("Вы ошиблись в почте или пароле", loginModal.getText(GENERAL_ERROR_MESSAGE));
+        assertEquals("Вы ошиблись в почте или пароле", loginModal.getAuthErrorMessageText());
     }
 
     @Story("Negative scenario: empty fields")
@@ -64,14 +57,9 @@ public class LoginTest extends BaseTest {
         logger.info("Submitting login form with empty fields");
         loginModal.clickSubmit();
 
-        logger.info("Waiting for email and password error messages");
-        WaitUtils.waitForVisibility(driver, EMAIL_ERROR_MESSAGE);
-        WaitUtils.waitForVisibility(driver, PASSWORD_ERROR_MESSAGE);
-
-        logger.info("Verifying error messages for empty fields");
         assertAll(
-                () -> assertEquals("Введите вашу электронную почту", loginModal.getText(EMAIL_ERROR_MESSAGE)),
-                () -> assertEquals("Введите ваш пароль", loginModal.getText(PASSWORD_ERROR_MESSAGE))
+                () -> assertEquals("Введите вашу электронную почту", loginModal.getEmailErrorMessageText()),
+                () -> assertEquals("Введите ваш пароль", loginModal.getPasswordErrorMessageText())
         );
     }
 
@@ -86,9 +74,6 @@ public class LoginTest extends BaseTest {
         logger.info("Submitting login form with invalid email format");
         loginModal.clickSubmit();
 
-        logger.info("Waiting for email format error message");
-        WaitUtils.waitForVisibility(driver, EMAIL_ERROR_MESSAGE);
-        logger.info("Verifying email format error message text");
-        assertEquals("Неверный формат электронной почты", loginModal.getText(EMAIL_ERROR_MESSAGE));
+        assertEquals("Неверный формат электронной почты", loginModal.getEmailErrorMessageText());
     }
 }

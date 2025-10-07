@@ -6,14 +6,14 @@ import ru.kupibilet.ui.pages.base.BasePage;
 
 public class HomePage extends BasePage {
 
-    public static final By LOGIN_BUTTON = By.cssSelector("[data-testid='open-auth-modal-button']");
+    private final By loginButtonLocator = By.cssSelector("[data-testid='open-auth-modal-button']");
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     public void clickLoginButton() {
-        log.info("Clicking the Login button [{}]", LOGIN_BUTTON);
-        click(LOGIN_BUTTON);
+        log.info("Clicking the Login button [{}]", loginButtonLocator);
+        click(loginButtonLocator);
     }
 }
