@@ -75,7 +75,7 @@ public class LoginModal extends BasePage {
     }
 
     private String getErrorMessage(By locator) {
-        log.info("Waiting for auth error message");
+        log.info("Waiting for error message");
         WaitUtils.waitForVisibility(driver, locator);
         return getText(locator);
     }
