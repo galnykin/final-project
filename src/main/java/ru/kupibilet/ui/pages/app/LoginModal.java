@@ -74,23 +74,23 @@ public class LoginModal extends BasePage {
         return find(authErrorMessageLocator);
     }
 
-    public String getAuthErrorMessageText() {
-        String message = getText(authErrorMessageLocator);
+    private String getErrorMessage(By locator) {
         log.info("Waiting for auth error message");
-        WaitUtils.waitForVisibility(driver, authErrorMessageLocator);
-        log.info("Auth error message: '{}'", message);
+        WaitUtils.waitForVisibility(driver, locator);
+        return getText(locator);
+    }
+
+    public String getAuthErrorMessageText() {
+        String message = getErrorMessage(authErrorMessageLocator);
+        log.info("Error message: '{}'", message);
         return message;
     }
 
     public String getEmailErrorMessageText() {
-        By message = emailErrorMessageLocator;
-        WaitUtils.waitForVisibility(driver, message);
-        return getText(message);
+        return getErrorMessage(emailErrorMessageLocator);
     }
 
     public String getPasswordErrorMessageText() {
-        By message = passwordErrorMessageLocator;
-        WaitUtils.waitForVisibility(driver, message);
-        return getText(message);
+        return getErrorMessage(passwordErrorMessageLocator);
     }
 }

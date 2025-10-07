@@ -7,45 +7,45 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
-public class DriverManager {
-    private static WebDriver driver;
+    public class DriverManager {
+        private static WebDriver driver;
 
-    private DriverManager() {
-        throw new UnsupportedOperationException("Utility class");
-    }
-
-    public static WebDriver getDriver() {
-        if (driver == null) {
-            initDriver();
+        private DriverManager() {
+            throw new UnsupportedOperationException("Utility class");
         }
-        return driver;
-    }
 
-    private static void initDriver() {
-        WebDriverManager.chromedriver().setup();
+        public static WebDriver getDriver() {
+            if (driver == null) {
+                initDriver();
+            }
+            return driver;
+        }
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--disable-notifications");
+        private static void initDriver() {
+            WebDriverManager.chromedriver().setup();
 
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts()
-                .implicitlyWait(Duration.ofSeconds(5))
-                .pageLoadTimeout(Duration.ofSeconds(10));
-    }
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            options.addArguments("--disable-notifications");
 
-    public static void quitDriver() {
-        if (driver != null) {
-            try {
-                driver.quit();
-            } finally {
-                driver = null;
+            driver = new ChromeDriver(options);
+            driver.manage().timeouts()
+                    .implicitlyWait(Duration.ofSeconds(5))
+                    .pageLoadTimeout(Duration.ofSeconds(10));
+        }
+
+        public static void quitDriver() {
+            if (driver != null) {
+                try {
+                    driver.quit();
+                } finally {
+                    driver = null;
+                }
             }
         }
-    }
 
-    public static void resetDriver() {
-        quitDriver();
-        getDriver();
+        public static void resetDriver() {
+            quitDriver();
+            getDriver();
+        }
     }
-}
