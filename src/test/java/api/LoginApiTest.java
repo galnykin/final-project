@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.kupibilet.api.clients.AuthClient;
 import ru.kupibilet.api.models.LoginRequest;
-import ru.kupibilet.ui.utils.ConfigReader;
+import ru.kupibilet.auth.dto.Credentials;
+import ru.kupibilet.auth.testdata.TestCredentialsFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,11 +27,9 @@ public class LoginApiTest extends BaseApiClient {
     @Test
     @DisplayName("API: Error when logging in with invalid credentials (expected 200)")
     public void testInvalidLoginReturns200() {
-        String email = ConfigReader.get("invalid.email");
-        String password = ConfigReader.get("invalid.password");
-
-        logger.info("Sending login request with email='{}' and invalid password", email);
-        LoginRequest request = new LoginRequest(email, password);
+        Credentials credentials = TestCredentialsFactory.validUnregisteredCredentials();
+        logger.info("Sending login request with email='{}' and password='{}'", credentials.getEmail(), credentials.getPassword());
+        LoginRequest request = new LoginRequest(credentials.getEmail(), credentials.getPassword());
 
         var response = AuthClient.login(request);
 

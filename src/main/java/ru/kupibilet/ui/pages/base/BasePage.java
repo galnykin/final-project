@@ -5,10 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.kupibilet.ui.utils.EnvironmentConfig;
 
 import static ru.kupibilet.ui.utils.SensitiveFieldRegistry.isSensitive;
 
 public abstract class BasePage {
+
+    protected static final String BASE_URL = EnvironmentConfig.BASE_URL;
 
     protected WebDriver driver;
     protected final Logger log = LoggerFactory.getLogger(getClass());

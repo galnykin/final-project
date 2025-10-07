@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.kupibilet.ui.drivers.DriverManager;
-import ru.kupibilet.ui.utils.ConfigReader;
+import ru.kupibilet.ui.utils.EnvironmentConfig;
 
 public abstract class BaseTest {
     protected WebDriver driver;
@@ -17,7 +17,7 @@ public abstract class BaseTest {
         logger.info("Initializing WebDriver");
         driver = DriverManager.getDriver();
 
-        String baseUrl = ConfigReader.get("base.url");
+        String baseUrl = EnvironmentConfig.BASE_URL;
         logger.info("Navigating to base URL: {}", baseUrl);
         driver.get(baseUrl);
     }
