@@ -1,7 +1,6 @@
 package ru.kupibilet.auth.testdata;
 
 import ru.kupibilet.auth.dto.Credentials;
-import ru.kupibilet.ui.utils.ConfigReader;
 
 import java.util.List;
 import java.util.Random;
@@ -13,8 +12,8 @@ public class TestCredentialsFactory {
 
     public static Credentials validUser() {
         return new Credentials(
-                ConfigReader.get("valid.email"),
-                ConfigReader.get("valid.password"));
+                "valid.email",
+                "valid.password");
     }
 
     public static Credentials emptyFields() {

@@ -27,9 +27,9 @@ public class LoginTest extends BaseTest {
 
     @BeforeEach
     public void init() {
-        homePage = new HomePage(driver);
-        logger.info("Clicking login button on HomePage");
-        homePage.clickLoginButton();
+        homePage = new HomePage(driver)
+                .open()
+                .clickLoginButton();
 
         logger.info("Opening login modal");
         loginModal = new LoginModal(driver);
