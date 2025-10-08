@@ -27,8 +27,13 @@ public class LoginApiTest extends BaseApiClient {
     @Test
     @DisplayName("API: Error when logging in with invalid credentials (expected 200)")
     public void testInvalidLoginReturns200() {
-        Credentials credentials = TestCredentialsFactory.validUnregisteredCredentials();
-        logger.info("Sending login request with email='{}' and password='{}'", credentials.getEmail(), credentials.getPassword());
+        Credentials credentials = new Credentials(
+                TestCredentialsFactory.validEmail(),
+                TestCredentialsFactory.randomPassword());
+
+        logger.info("Sending login request with email='{}' and password='{}'",
+                credentials.getEmail(),
+                credentials.getPassword());
         LoginRequest request = new LoginRequest(credentials.getEmail(), credentials.getPassword());
 
         var response = AuthClient.login(request);

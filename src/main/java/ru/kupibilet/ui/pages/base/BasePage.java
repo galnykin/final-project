@@ -7,10 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.kupibilet.ui.utils.EnvironmentConfig;
 
+import java.time.Duration;
+
 import static ru.kupibilet.ui.utils.SensitiveFieldRegistry.isSensitive;
 
 public abstract class BasePage {
 
+    protected static final Duration TIMEOUT = Duration.ofMillis(500);
     protected static final String BASE_URL = EnvironmentConfig.BASE_URL;
 
     protected WebDriver driver;

@@ -13,14 +13,10 @@ public class HomePage extends BasePage {
         log.info("Initializing Home page");
     }
 
-    public HomePage open() {
-        driver.get(BASE_URL);
-        return this;
-    }
-
-    public HomePage clickLoginButton() {
+    public LoginModal clickLoginButton() {
         log.info("Clicking the Login button [{}]", loginButtonLocator);
         click(loginButtonLocator);
-        return this;
+        log.info("Opening login modal");
+        return new LoginModal(driver);
     }
 }
