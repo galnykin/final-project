@@ -12,31 +12,27 @@ pipeline {
                 bat 'mvn clean test'
             }
         }
-
-        stage('Publish Allure Report') {
-            steps {
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    results: [[path: 'target\\allure-results']]
-                ])
-            }
-        }
-
-        stage('Archive Report') {
-            steps {
-                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
-            }
-        }
     }
 
     post {
+        always {
+            echo 'Generating Allure report...'
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'target\\allure-results']]
+            ])
+            archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+        }
+
         success {
             echo 'Build completed successfully ✅'
         }
+
         failure {
             echo 'Build failed ❌'
         }
+
         unstable {
             echo 'Build is unstable ⚠️ — some tests may have failed'
         }
