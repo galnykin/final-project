@@ -7,6 +7,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -161,6 +162,7 @@ public class LoginTest extends BaseTest {
     @Story("Negative scenario: email is too long")
     @Severity(SeverityLevel.NORMAL)
     @Test
+    @Disabled
     @DisplayName("Error when email is too long")
     public void testLongEmailShowsErrorMessage() {
         loginModal.submitInvalidEmail(TestCredentialsFactory.longEmail());

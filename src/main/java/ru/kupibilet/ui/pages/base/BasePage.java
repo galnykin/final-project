@@ -13,7 +13,7 @@ import static ru.kupibilet.ui.utils.SensitiveFieldRegistry.isSensitive;
 
 public abstract class BasePage {
 
-    protected static final Duration TIMEOUT = Duration.ofMillis(500);
+    protected Duration timeout = Duration.ofMillis(500);
     protected static final String BASE_URL = EnvironmentConfig.BASE_URL;
 
     protected WebDriver driver;
