@@ -9,22 +9,21 @@ import ru.kupibilet.ui.drivers.DriverManager;
 import ru.kupibilet.ui.utils.EnvironmentConfig;
 
 public abstract class BaseTest {
+
+    protected static final String baseUrl = EnvironmentConfig.BASE_URL;
     protected WebDriver driver;
-    protected static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
+    protected static final Logger log = LoggerFactory.getLogger(BaseTest.class);
 
     @BeforeEach
     public void setUp() {
-        logger.info("Initializing WebDriver");
+        log.info("Initializing WebDriver");
         driver = DriverManager.getDriver();
-
-        String baseUrl = EnvironmentConfig.BASE_URL;
-        logger.info("Navigating to base URL: {}", baseUrl);
         driver.get(baseUrl);
     }
 
     @AfterEach
     public void tearDown() {
-        logger.info("Closing WebDriver session");
+        log.info("Closing WebDriver session");
         DriverManager.quitDriver();
     }
 }
