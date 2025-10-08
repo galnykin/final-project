@@ -1,6 +1,8 @@
 package ru.kupibilet.ui.utils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -39,6 +41,22 @@ public class WaitUtils {
     public static WebElement waitForVisibility(WebDriver driver, By locator, int timeoutSeconds) {
         return new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    /**
+     * Checks whether the element located by the given locator is visible on the page.
+     *
+     * @param driver  WebDriver instance
+     * @param locator locator of the element to check
+     * @return true if the element is visible, false otherwise
+     */
+    public static boolean isElementVisible(WebDriver driver, By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            return element.isDisplayed();
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            return false;
+        }
     }
 
     /**
