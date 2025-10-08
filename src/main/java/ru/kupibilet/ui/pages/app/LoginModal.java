@@ -16,6 +16,7 @@ public class LoginModal extends BasePage {
     public static final String PASSWORD_REQUIRED_MESSAGE = "Введите ваш пароль";
     public static final String EMAIL_FORMAT_INVALID_MESSAGE = "Неверный формат электронной почты";
 
+    public static final By MODAL_LOCATOR = By.cssSelector("section[role='dialog'][aria-modal='true']");
     private final By emailFieldLocator = By.cssSelector("[data-testid='email-input']");
     private final By passwordFieldLocator = By.cssSelector("[data-testid='password-input']");
     private final By submitButtonLocator = By.cssSelector("[data-testid='sign-in-button']");
