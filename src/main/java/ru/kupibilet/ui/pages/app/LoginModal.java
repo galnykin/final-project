@@ -1,6 +1,7 @@
 package ru.kupibilet.ui.pages.app;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.kupibilet.auth.testdata.TestCredentialsFactory;
@@ -17,14 +18,14 @@ public class LoginModal extends BasePage {
     public static final String EMAIL_FORMAT_INVALID_MESSAGE = "Неверный формат электронной почты";
 
     public static final By MODAL_LOCATOR = By.cssSelector("section[role='dialog'][aria-modal='true']");
+    public static final By EMAIL_ERROR_MESSAGE_LOCATOR = By.cssSelector("""
+            div:has(input[data-testid="email-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
     private final By emailFieldLocator = By.cssSelector("[data-testid='email-input']");
     private final By passwordFieldLocator = By.cssSelector("[data-testid='password-input']");
     private final By submitButtonLocator = By.cssSelector("[data-testid='sign-in-button']");
     private final By registerLinkLocator = By.linkText("Регистрация");
     private final By forgotPasswordLinkLocator = By.linkText("Забыли пароль?");
     private final By authErrorMessageLocator = By.cssSelector("span.sc-qyqger-0.gUhGbX");
-    private final By emailErrorMessageLocator = By.cssSelector("""
-            div:has(input[data-testid="email-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
     private final By passwordErrorMessageLocator = By.cssSelector("""
             div:has(input[data-testid="password-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
 
@@ -78,16 +79,6 @@ public class LoginModal extends BasePage {
         submitCredentials(credentials);
     }
 
-    public void submitEmptyEmail() {
-        Credentials credentials = new Credentials(
-                TestCredentialsFactory.emptyEmail(),
-                TestCredentialsFactory.randomPassword()
-        );
-        log.info("Submitting login form with empty email");
-        submitCredentials(credentials);
-    }
-
-
     public void clickRegisterLink() {
         click(registerLinkLocator);
     }
@@ -113,7 +104,11 @@ public class LoginModal extends BasePage {
     }
 
     public String getEmailErrorMessageText() {
-        return getErrorMessage(emailErrorMessageLocator);
+        try {
+            return driver.findElement(EMAIL_ERROR_MESSAGE_LOCATOR).getText();
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("Элемент ошибки email не найден", e);
+        }
     }
 
     public String getPasswordErrorMessageText() {

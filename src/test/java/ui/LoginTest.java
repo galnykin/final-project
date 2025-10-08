@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 import ru.kupibilet.auth.testdata.TestCredentialsFactory;
 import ru.kupibilet.ui.pages.app.HomePage;
 import ru.kupibilet.ui.pages.app.LoginModal;
+import ru.kupibilet.ui.utils.WaitUtils;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Epic("Authorization")
 @Feature("Login Modal Window")
@@ -162,7 +164,11 @@ public class LoginTest extends BaseTest {
     @DisplayName("Error when email is too long")
     public void testLongEmailShowsErrorMessage() {
         loginModal.submitInvalidEmail(TestCredentialsFactory.longEmail());
-        assertEquals(LoginModal.WRONG_EMAIL_OR_PASSWORD_MESSAGE, loginModal.getEmailErrorMessageText());
+        assertTrue(
+                WaitUtils.isElementVisible(driver, LoginModal.EMAIL_ERROR_MESSAGE_LOCATOR),
+                "An email error was expected, but the element did not appear on the page."
+        );
+        assertEquals(LoginModal.EMAIL_REQUIRED_MESSAGE, loginModal.getEmailErrorMessageText());
     }
 
     @Story("Negative scenario: empty fields")
