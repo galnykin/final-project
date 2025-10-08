@@ -16,7 +16,7 @@ import java.time.Duration;
  */
 public class WaitUtils {
 
-    private static final int DEFAULT_TIMEOUT = 5;
+    private static final int DEFAULT_TIMEOUT = 10;
 
     /**
      * Waits until the specified element becomes visible on the page.
@@ -72,6 +72,22 @@ public class WaitUtils {
     }
 
     /**
+     * Waits until the specified element becomes visible on the page.
+     * <p>
+     * Useful for detecting that dynamic content (e.g. autocomplete dropdowns, loaders)
+     * has finished loading and is ready for interaction.
+     *
+     * @param driver  WebDriver instance
+     * @param locator locator of the element to wait for
+     * @return true if the element becomes visible within the timeout
+     */
+    public static boolean waitUntilVisible(WebDriver driver, By locator) {
+        return new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfElementLocated(locator)) != null;
+    }
+
+
+    /**
      * Waits until the specified element is clickable.
      *
      * @param driver  WebDriver instance
@@ -106,5 +122,21 @@ public class WaitUtils {
     public static boolean waitForText(WebDriver driver, By locator, String expectedText) {
         return new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
                 .until(ExpectedConditions.textToBePresentInElementLocated(locator, expectedText));
+    }
+
+    /**
+     * Waits until the specified input element contains the expected value in its "value" attribute.
+     * <p>
+     * Useful for verifying that asynchronous input (e.g. autocomplete, delayed typing) has completed
+     * before proceeding with further actions like clicking or submitting.
+     *
+     * @param driver        WebDriver instance
+     * @param locator       locator of the input element to wait for
+     * @param expectedValue value to wait for in the input field
+     * @return true if the value appears within the timeout
+     */
+    public static boolean waitUntilInputValueEquals(WebDriver driver, By locator, String expectedValue) {
+        return new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
+                .until(d -> expectedValue.equals(d.findElement(locator).getAttribute("value")));
     }
 }
