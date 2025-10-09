@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.kupibilet.auth.dto.FlightSearchQuery;
-import ru.kupibilet.ui.pages.app.HomePage;
+import ru.kupibilet.ui.pages.HomePage;
 import ru.kupibilet.ui.utils.WaitUtils;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -1,4 +1,4 @@
-package ru.kupibilet.ui.pages.app;
+package ru.kupibilet.ui.pages.popups;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
