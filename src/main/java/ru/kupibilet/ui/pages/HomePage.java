@@ -1,14 +1,18 @@
-package ru.kupibilet.ui.pages.app;
+package ru.kupibilet.ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.kupibilet.ui.pages.base.BasePage;
+import ru.kupibilet.ui.pages.components.HeaderComponent;
+import ru.kupibilet.ui.pages.popups.LoginModal;
 import ru.kupibilet.ui.utils.WaitUtils;
 
 import java.time.LocalDate;
 
 public class HomePage extends BasePage {
+
+    public static final By TICKET_ITEM_LOCATOR = By.cssSelector("[data-testid='serp-ticket-item']");
 
     private final By loginButtonLocator = By.cssSelector("[data-testid='open-auth-modal-button']");
     private final By searchTicketButtonLocator = By.cssSelector("[data-testid='search-ticket-button']");
@@ -17,11 +21,16 @@ public class HomePage extends BasePage {
     private final By departureDateInputInputLocator = By.cssSelector("[data-testid='departure-date']");
     private final By autocompleteDropdownLocator = By.id("react-autowhatever-route-direction-input-to");
 
-    public static final By TICKET_ITEM_LOCATOR = By.cssSelector("[data-testid='serp-ticket-item']");
+    private final HeaderComponent header;
 
     public HomePage(WebDriver driver) {
         super(driver);
         log.info("Initializing Home page");
+        header = new HeaderComponent(driver);
+    }
+
+    public HeaderComponent getHeader() {
+        return header;
     }
 
     public LoginModal clickLoginButton() {
