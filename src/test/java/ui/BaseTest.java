@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.kupibilet.ui.drivers.DriverManager;
-import ru.kupibilet.ui.utils.EnvironmentConfig;
+import ru.kupibilet.ui.drivers.SeleniumDriverFactory;
+import ru.kupibilet.utils.ui.EnvironmentConfig;
 
 public abstract class BaseTest {
 
@@ -17,13 +17,13 @@ public abstract class BaseTest {
     @BeforeEach
     public void setUp() {
         log.info("Initializing WebDriver");
-        driver = DriverManager.getDriver();
+        driver = SeleniumDriverFactory.getDriver();
         driver.get(baseUrl);
     }
 
     @AfterEach
     public void tearDown() {
         log.info("Closing WebDriver session");
-        DriverManager.quitDriver();
+        SeleniumDriverFactory.quitDriver();
     }
 }
