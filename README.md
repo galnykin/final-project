@@ -33,71 +33,70 @@ At the root of the project:
 ```
 src/
 ├── main/
-│   └── java/
-│       └── ru/kupibilet/
-│           ├── api/                                        # Integration layer for external APIs
-│           │   ├── clients/                                # HTTP clients or service wrappers
-│           │   │   └── AuthClient.java
-│           │   └── models/                                 # Request/response models for API communication
-│           │       └── LoginRequest.java
+│   └── java/ru/kupibilet/
+│       ├── api/                                        # Integration layer for external APIs
+│       │   ├── clients/                                # HTTP clients or service wrappers
+│       │   │   └── AuthClient.java
+│       │   └── models/                                 # Request/response models for API communication
+│       │       └── LoginRequest.java
 
-│           ├── auth/                                       # Domain logic for authentication
-│           │   └── dto/                                    # Credential handling and identity transfer
-│           │       └── Credentials.java
+│       ├── auth/                                       # Domain logic for authentication
+│       │   └── dto/                                    # Credential handling and identity transfer
+│       │       └── Credentials.java
 
-│           ├── search/                                     # Domain logic for flight search
-│           │   └── dto/                                    # Data transfer objects for search queries
-│           │       ├── FlightSearchQuery.java
-│           │       └── TravelClass.java
+│       ├── search/                                     # Domain logic for flight search
+│       │   └── dto/                                    # Data transfer objects for search queries
+│       │       ├── FlightSearchQuery.java
+│       │       └── TravelClass.java
 
-│           ├── testdata/                                   # Unified test data generators for all domains
-│           │   ├── TestCredentialsFactory.java
-│           │   └── FlightSearchDataFactory.java
+│       ├── testdata/                                   # Unified test data generators for all domains
+│       │   ├── TestCredentialsFactory.java
+│       │   └── FlightSearchDataFactory.java
 
-│           ├── ui/                                         # UI layer: page objects and automation logic
-│           │   ├── config/                                 # Browser and environment configuration
-│           │   │   ├── BrowserType.java
-│           │   │   └── Config.java
-│           │   ├── drivers/                                # WebDriver initialization and management
-│           │   │   └── SeleniumDriverFactory.java
-│           │   ├── exceptions/                             # Custom exceptions for UI failures
-│           │   │   └── DriverInitializationException.java
-│           │   ├── screens/                                # Page object model structure (full pages)
-│           │   │   ├── base/                               # Base class for all screens
-│           │   │   │   └── BasePage.java
-│           │   │   ├── HomePage.java
-│           │   │   └── SearchResultsPage.java
-│           │   ├── components/                             # Reusable UI components
-│           │   │   ├── base/                               # Base classes for components and dialogs
-│           │   │   │   ├── BaseComponent.java
-│           │   │   │   └── BaseDialogComponent.java
-│           │   │   ├── HeaderComponent.java
-│           │   │   └── TicketCardComponent.java
-│           │   └── popups/                                 # Dialogs and overlays
-│           │       ├── LoginDialog.java
-│           │       └── TicketDetailsDialog.java
+│       ├── ui/                                         # UI layer: page objects and automation logic
+│       │   ├── config/                                 # Browser and environment configuration
+│       │   │   ├── BrowserType.java
+│       │   │   └── Config.java
+│       │   ├── drivers/                                # WebDriver initialization and management
+│       │   │   └── SeleniumDriverFactory.java
+│       │   ├── exceptions/                             # Custom exceptions for UI failures
+│       │   │   └── DriverInitializationException.java
+│       │   ├── screens/                                # Page object model structure (full pages)
+│       │   │   ├── base/                               # Base class for all screens
+│       │   │   │   └── BasePage.java
+│       │   │   ├── HomePage.java
+│       │   │   └── SearchResultsPage.java
+│       │   ├── components/                             # Reusable UI components
+│       │   │   ├── base/                               # Base classes for components and dialogs
+│       │   │   │   ├── BaseComponent.java
+│       │   │   │   └── BaseDialogComponent.java
+│       │   │   ├── HeaderComponent.java
+│       │   │   └── TicketCardComponent.java
+│       │   └── popups/                                 # Dialogs and overlays
+│       │       ├── LoginDialog.java
+│       │       └── TicketDetailsDialog.java
 
-│           └── utils/
-│               └── ui/                                     # UI-specific helper classes
-│                   ├── EnvironmentConfig.java
-│                   ├── SensitiveFieldRegistry.java
-│                   └── WaitUtils.java
+│       └── utils/
+│           └── ui/                                     # UI-specific helper classes
+│               ├── EnvironmentConfig.java
+│               ├── SensitiveFieldRegistry.java
+│               └── WaitUtils.java
 
 ├── test/          
-│   ├── java/                                               # Test classes and scenarios
-│   │   ├── api/                                            # API-level tests
+│   ├── java/                                           # Test classes and scenarios
+│   │   ├── api/                                        # API-level tests
 │   │   │   ├── BaseApiClient.java
 │   │   │   └── LoginApiTest.java
-│   │   └── ui/                                             # UI-level tests
+│   │   └── ui/                                         # UI-level tests
 │   │       ├── BaseTest.java
 │   │       ├── LoginTest.java
 │   │       └── FlightSearchTest.java
 
-│   └── resources/                                          # Resources for test execution
-│       └── allure.properties                               # Allure reporting configuration
+│   └── resources/                                      # Resources for test execution
+│       └── allure.properties                           # Allure reporting configuration
 
 resources/
-└── log4j2.xml                                              # Logging configuration
+└── log4j2.xml                                          # Logging configuration
 ```
 
 ---
