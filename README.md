@@ -134,7 +134,6 @@ All UI tests inherit from `BaseTest`, which provides:
 - WebDriver initialization via `SeleniumDriverFactory.getDriver()`
 - Navigation to the configured `baseUrl` before each test
 - Graceful teardown after each test using `quitDriver()`
-- Logging via SLF4J for setup and teardown events
 
 ---
 
@@ -181,7 +180,6 @@ mvn -Dtest=LoginTest test
 ### CI/CD Integration
 
 - Jenkins executes tests via declarative pipeline (`Jenkinsfile`)
-- Allure reports are archived after each build
 - Pipeline supports scheduled and manual runs
 - Allure reports are generated and archived after each run
 ---
