@@ -1,8 +1,9 @@
-package ru.kupibilet.ui.utils;
+package ru.kupibilet.utils.ui;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,8 +29,45 @@ public class WaitUtils {
      * @return true if the element becomes visible within the timeout
      */
     public static boolean waitUntilVisible(WebDriver driver, By locator) {
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT)
-                .until(ExpectedConditions.visibilityOfElementLocated(locator)) != null;
+        try {
+            return new WebDriverWait(driver, DEFAULT_TIMEOUT)
+                    .until(ExpectedConditions.visibilityOfElementLocated(locator)) != null;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Waits until the specified element becomes visible on the page using a custom timeout.
+     * <p>
+     * Useful for detecting that dynamic content (e.g. autocomplete dropdowns, loaders)
+     * has finished loading and is ready for interaction.
+     *
+     * @param driver         WebDriver instance
+     * @param locator        Locator of the element to wait for
+     * @param timeoutSeconds Maximum wait time in seconds
+     * @return true if the element becomes visible within the timeout, false otherwise
+     */
+    public static boolean waitUntilVisible(WebDriver driver, By locator, int timeoutSeconds) {
+        try {
+            return new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
+                    .until(ExpectedConditions.visibilityOfElementLocated(locator)) != null;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Waits until the specified element becomes visible on the page using a custom timeout.
+     *
+     * @param driver         WebDriver instance
+     * @param locator        locator of the element to wait for
+     * @param timeoutSeconds maximum wait time in seconds
+     * @return visible WebElement
+     */
+    public static WebElement waitForVisibility(WebDriver driver, By locator, int timeoutSeconds) {
+        return new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     /**
@@ -78,19 +116,6 @@ public class WaitUtils {
      */
     public static WebElement waitForVisibility(WebDriver driver, By locator) {
         return new WebDriverWait(driver, DEFAULT_TIMEOUT)
-                .until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-
-    /**
-     * Waits until the specified element becomes visible on the page using a custom timeout.
-     *
-     * @param driver         WebDriver instance
-     * @param locator        locator of the element to wait for
-     * @param timeoutSeconds maximum wait time in seconds
-     * @return visible WebElement
-     */
-    public static WebElement waitForVisibility(WebDriver driver, By locator, int timeoutSeconds) {
-        return new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 

@@ -1,4 +1,4 @@
-package ru.kupibilet.auth.testdata;
+package ru.kupibilet.testdata;
 
 import com.github.javafaker.Faker;
 

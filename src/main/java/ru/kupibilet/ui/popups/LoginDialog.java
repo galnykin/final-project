@@ -1,53 +1,56 @@
-package ru.kupibilet.ui.pages.popups;
+package ru.kupibilet.ui.popups;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.kupibilet.auth.testdata.TestCredentialsFactory;
-import ru.kupibilet.ui.pages.base.BasePage;
-import ru.kupibilet.ui.utils.SensitiveFieldRegistry;
-import ru.kupibilet.ui.utils.WaitUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.kupibilet.testdata.TestCredentialsFactory;
+import ru.kupibilet.ui.components.base.BaseDialogComponent;
+import ru.kupibilet.utils.ui.SensitiveFieldRegistry;
+import ru.kupibilet.utils.ui.WaitUtils;
 import ru.kupibilet.auth.dto.Credentials;
 
-public class LoginModal extends BasePage {
+public class LoginDialog extends BaseDialogComponent {
+
+    private static final Logger log = LoggerFactory.getLogger(LoginDialog.class);
 
     public static final String WRONG_EMAIL_OR_PASSWORD_MESSAGE = "Вы ошиблись в почте или пароле";
     public static final String EMAIL_REQUIRED_MESSAGE = "Введите вашу электронную почту";
     public static final String PASSWORD_REQUIRED_MESSAGE = "Введите ваш пароль";
     public static final String EMAIL_FORMAT_INVALID_MESSAGE = "Неверный формат электронной почты";
 
-    public static final By MODAL_LOCATOR = By.cssSelector("section[role='dialog'][aria-modal='true']");
     public static final By EMAIL_ERROR_MESSAGE_LOCATOR = By.cssSelector("""
             div:has(input[data-testid="email-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
-    private final By emailFieldLocator = By.cssSelector("[data-testid='email-input']");
-    private final By passwordFieldLocator = By.cssSelector("[data-testid='password-input']");
-    private final By submitButtonLocator = By.cssSelector("[data-testid='sign-in-button']");
-    private final By registerLinkLocator = By.linkText("Регистрация");
-    private final By forgotPasswordLinkLocator = By.linkText("Забыли пароль?");
-    private final By authErrorMessageLocator = By.cssSelector("span.sc-qyqger-0.gUhGbX");
-    private final By passwordErrorMessageLocator = By.cssSelector("""
+    private final By emailInput = By.cssSelector("[data-testid='email-input']");
+    private final By passwordInput = By.cssSelector("[data-testid='password-input']");
+    private final By submitButton = By.cssSelector("[data-testid='sign-in-button']");
+    private final By registerLink = By.linkText("Регистрация");
+    private final By forgotPasswordLink = By.linkText("Забыли пароль?");
+    private final By authErrorMessage = By.cssSelector("span.sc-qyqger-0.gUhGbX");
+    private final By passwordErrorMessage = By.cssSelector("""
             div:has(input[data-testid="password-input"]) + div.styled__StyledContainer-sc-awcqi9-0.iLlVPd""");
 
-    public LoginModal(WebDriver driver) {
+    public LoginDialog(WebDriver driver) {
         super(driver);
     }
 
-    public LoginModal enterEmail(String email) {
+    public LoginDialog enterEmail(String email) {
         log.info("Typing email: '{}'", email);
-        type(emailFieldLocator, email);
+        type(emailInput, email);
         return this;
     }
 
-    public LoginModal enterPassword(String password) {
+    public LoginDialog enterPassword(String password) {
         log.info("Typing password");
-        type(passwordFieldLocator, password);
+        type(passwordInput, password);
         return this;
     }
 
     public void clickSubmitButton() {
-        log.info("Clicking Submit button [{}]", submitButtonLocator);
-        click(submitButtonLocator);
+        log.info("Clicking Submit button [{}]", submitButton);
+        click(submitButton);
     }
 
     public void submitCredentials(String email, String password) {
@@ -80,15 +83,15 @@ public class LoginModal extends BasePage {
     }
 
     public void clickRegisterLink() {
-        click(registerLinkLocator);
+        click(registerLink);
     }
 
     public void clickForgotPasswordLink() {
-        click(forgotPasswordLinkLocator);
+        click(forgotPasswordLink);
     }
 
     public WebElement getErrorMessageElement() {
-        return find(authErrorMessageLocator);
+        return find(authErrorMessage);
     }
 
     private String getErrorMessage(By locator) {
@@ -98,7 +101,7 @@ public class LoginModal extends BasePage {
     }
 
     public String getAuthErrorMessageText() {
-        String message = getErrorMessage(authErrorMessageLocator);
+        String message = getErrorMessage(authErrorMessage);
         log.info("Error message: '{}'", message);
         return message;
     }
@@ -112,6 +115,18 @@ public class LoginModal extends BasePage {
     }
 
     public String getPasswordErrorMessageText() {
-        return getErrorMessage(passwordErrorMessageLocator);
+        return getErrorMessage(passwordErrorMessage);
+    }
+
+    public boolean isClosed() {
+        return isClosed(ROOT);
+    }
+
+    public boolean isVisible() {
+        return isVisible(ROOT);
+    }
+
+    public void close() {
+        closeByClickOutside();
     }
 }

@@ -1,4 +1,4 @@
-package ru.kupibilet.ui.utils;
+package ru.kupibilet.utils.ui;
 
 import org.openqa.selenium.By;
 

@@ -1,21 +1,26 @@
-package ru.kupibilet.ui.pages.base;
-
+package ru.kupibilet.ui.components.base;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class BaseComponent {
 
     protected final WebDriver driver;
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     public BaseComponent(WebDriver driver) {
         this.driver = driver;
     }
 
-    // Общие методы для компонентов
+    protected WebElement find(By locator) {
+        return driver.findElement(locator);
+    }
+
     protected void click(By locator) {
-        driver.findElement(locator).click();
+        find(locator).click();
     }
 
     protected void type(By locator, String text) {
@@ -25,8 +30,14 @@ public abstract class BaseComponent {
     }
 
     protected String getText(By locator) {
-        return driver.findElement(locator).getText();
+        return find(locator).getText();
     }
 
-    // и т.д.
+    protected boolean isVisible(By locator) {
+        return find(locator).isDisplayed();
+    }
+
+    protected boolean isEnabled(By locator) {
+        return find(locator).isEnabled();
+    }
 }

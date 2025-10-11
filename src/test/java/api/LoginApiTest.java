@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import ru.kupibilet.api.clients.AuthClient;
 import ru.kupibilet.api.models.LoginRequest;
 import ru.kupibilet.auth.dto.Credentials;
-import ru.kupibilet.auth.testdata.TestCredentialsFactory;
+import ru.kupibilet.testdata.TestCredentialsFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,15 +1,15 @@
-package ru.kupibilet.ui.pages.base;
+package ru.kupibilet.ui.screens.base;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.kupibilet.ui.utils.EnvironmentConfig;
+import ru.kupibilet.utils.ui.EnvironmentConfig;
 
 import java.time.Duration;
 
-import static ru.kupibilet.ui.utils.SensitiveFieldRegistry.isSensitive;
+import static ru.kupibilet.utils.ui.SensitiveFieldRegistry.isSensitive;
 
 public abstract class BasePage {
 
@@ -17,7 +17,7 @@ public abstract class BasePage {
     protected static final String BASE_URL = EnvironmentConfig.BASE_URL;
 
     protected WebDriver driver;
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    private static final Logger log = LoggerFactory.getLogger(BasePage.class);
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -45,5 +45,9 @@ public abstract class BasePage {
 
     protected WebElement find(By locator) {
         return driver.findElement(locator);
+    }
+
+    public boolean isVisible(By locator) {
+        return find(locator).isDisplayed();
     }
 }
