@@ -1,7 +1,8 @@
-
 ## Kupibilet Test Automation Framework
 
-Automated framework for UI and API testing of the Kupibilet web platform. Built using Java, Maven, JUnit 5, Selenium WebDriver, and Rest Assured. Designed with modular architecture for scalability, maintainability, and clear separation of concerns.
+Automated framework for UI and API testing of the Kupibilet web platform. Built using Java, Maven, JUnit 5, Selenium
+WebDriver, and Rest Assured. Designed with modular architecture for scalability, maintainability, and clear separation
+of concerns.
 
 ---
 
@@ -34,69 +35,69 @@ src/
 ├── main/
 │   └── java/
 │       └── ru/kupibilet/
-│           ├── api/                          # Integration layer for external APIs
-│           │   ├── clients/                  # HTTP clients or service wrappers
+│           ├── api/                                        # Integration layer for external APIs
+│           │   ├── clients/                                # HTTP clients or service wrappers
 │           │   │   └── AuthClient.java
-│           │   └── models/                   # Request/response models for API communication
+│           │   └── models/                                 # Request/response models for API communication
 │           │       └── LoginRequest.java
 
-│           ├── auth/                         # Domain logic for authentication
-│           │   └── dto/                      # Credential handling and identity transfer
+│           ├── auth/                                       # Domain logic for authentication
+│           │   └── dto/                                    # Credential handling and identity transfer
 │           │       └── Credentials.java
 
-│           ├── search/                       # Domain logic for flight search
-│           │   └── dto/                      # Data transfer objects for search queries
+│           ├── search/                                     # Domain logic for flight search
+│           │   └── dto/                                    # Data transfer objects for search queries
 │           │       ├── FlightSearchQuery.java
 │           │       └── TravelClass.java
 
-│           ├── testdata/                     # Unified test data generators for all domains
+│           ├── testdata/                                   # Unified test data generators for all domains
 │           │   ├── TestCredentialsFactory.java
 │           │   └── FlightSearchDataFactory.java
 
-│           ├── ui/                           # UI layer: page objects and automation logic
-│           │   ├── config/                   # Browser and environment configuration
+│           ├── ui/                                         # UI layer: page objects and automation logic
+│           │   ├── config/                                 # Browser and environment configuration
 │           │   │   ├── BrowserType.java
 │           │   │   └── Config.java
-│           │   ├── drivers/                  # WebDriver initialization and management
+│           │   ├── drivers/                                # WebDriver initialization and management
 │           │   │   └── SeleniumDriverFactory.java
-│           │   ├── exceptions/               # Custom exceptions for UI failures
+│           │   ├── exceptions/                             # Custom exceptions for UI failures
 │           │   │   └── DriverInitializationException.java
-│           │   ├── screens/                  # Page object model structure (full pages)
-│           │   │   ├── base/                 # Base class for all screens
+│           │   ├── screens/                                # Page object model structure (full pages)
+│           │   │   ├── base/                               # Base class for all screens
 │           │   │   │   └── BasePage.java
 │           │   │   ├── HomePage.java
 │           │   │   └── SearchResultsPage.java
-│           │   ├── components/               # Reusable UI components
-│           │   │   ├── base/                 # Base classes for components and dialogs
+│           │   ├── components/                             # Reusable UI components
+│           │   │   ├── base/                               # Base classes for components and dialogs
 │           │   │   │   ├── BaseComponent.java
 │           │   │   │   └── BaseDialogComponent.java
 │           │   │   ├── HeaderComponent.java
 │           │   │   └── TicketCardComponent.java
-│           │   └── popups/                   # Dialogs and overlays
+│           │   └── popups/                                 # Dialogs and overlays
 │           │       ├── LoginDialog.java
 │           │       └── TicketDetailsDialog.java
 
 │           └── utils/
-│               └── ui/                       # UI-specific helper classes
+│               └── ui/                                     # UI-specific helper classes
 │                   ├── EnvironmentConfig.java
 │                   ├── SensitiveFieldRegistry.java
 │                   └── WaitUtils.java
 
-├── test/
-│   ├── java/                                 # Test classes and scenarios
-│   │   ├── api/                              # API-level tests
+├── test/          
+│   ├── java/                                               # Test classes and scenarios
+│   │   ├── api/                                            # API-level tests
 │   │   │   ├── BaseApiClient.java
 │   │   │   └── LoginApiTest.java
-│   │   └── ui/                               # UI-level tests
+│   │   └── ui/                                             # UI-level tests
 │   │       ├── BaseTest.java
 │   │       ├── LoginTest.java
 │   │       └── FlightSearchTest.java
 
-│   └── resources/                            # Resources for test execution
-│       └── allure.properties                 # Allure reporting configuration
+│   └── resources/                                          # Resources for test execution
+│       └── allure.properties                               # Allure reporting configuration
 
 resources/
-└── log4j2.xml                                # Logging configuration
+└── log4j2.xml                                              # Logging configuration
 ```
 
 ---
@@ -182,4 +183,5 @@ mvn -Dtest=LoginTest test
 - Jenkins executes tests via declarative pipeline (`Jenkinsfile`)
 - Pipeline supports scheduled and manual runs
 - Allure reports are generated and archived after each run
+
 ---
