@@ -35,13 +35,22 @@ src/
 ├── main/java/ru/kupibilet/
 │   ├── api/                                        # Integration layer for external APIs
 │   │   ├── clients/                                # HTTP clients or service wrappers
-│   │   │   └── AuthClient.java
-│   │   └── models/                                 # Request/response models for API communication
-│   │       └── LoginRequest.java
+│   │   │   ├── AuthClient.java
+│   │   │   └── BaseApiClient.java                  # Shared HTTP logic and logging
+│   │   ├── models/                                 # Request/response models for API communication
+│   │   │   └── LoginRequest.java
+│   │   └── utils/                                  # API-specific utilities
+│   │       └── ApiLogUtils.java                    # Logging helpers for API requests/responses
 
 │   ├── auth/                                       # Domain logic for authentication
 │   │   └── dto/                                    # Credential handling and identity transfer
 │   │       └── Credentials.java
+
+│   ├── config/                                     # Global and environment-specific configuration
+│   │   ├── Config.java                             # Global settings: API URLs, timeouts, flags
+│   │   ├── BrowserType.java                        # Supported browser types used in UI automation
+│   │   ├── BrowserConfig.java                      # UI-specific settings: browser type, headless mode, window size
+│   │   └── ApiConfig.java                          # API-specific settings: base URLs, tokens, headers
 
 │   ├── search/                                     # Domain logic for flight search
 │   │   └── dto/                                    # Data transfer objects for search queries
@@ -49,22 +58,10 @@ src/
 │   │       └── TravelClass.java
 
 │   ├── testdata/                                   # Unified test data generators for all domains
-│   │   ├── TestCredentialsFactory.java
-│   │   └── FlightSearchDataFactory.java
+│   │   ├── TestCredentialsFactory.java             # Factory for login credentials
+│   │   └── FlightSearchDataFactory.java            # Factory for flight search scenarios
 
 │   ├── ui/                                         # UI layer: page objects and automation logic
-│   │   ├── config/                                 # Browser and environment configuration
-│   │   │   ├── BrowserType.java
-│   │   │   └── Config.java
-│   │   ├── drivers/                                # WebDriver initialization and management
-│   │   │   └── SeleniumDriverFactory.java
-│   │   ├── exceptions/                             # Custom exceptions for UI failures
-│   │   │   └── DriverInitializationException.java
-│   │   ├── screens/                                # Page object model structure (full pages)
-│   │   │   ├── base/                               # Base class for all screens
-│   │   │   │   └── BasePage.java
-│   │   │   ├── HomePage.java
-│   │   │   └── SearchResultsPage.java
 │   │   ├── components/                             # Reusable UI components
 │   │   │   ├── base/                               # Base classes for components and dialogs
 │   │   │   │   ├── BaseComponent.java
@@ -74,22 +71,41 @@ src/
 │   │   │   ├── FlightSegment.java
 │   │   │   └── interfaces/
 │   │   │       └── Clickable.java                  # Interface for clickable UI components only
+│   │   ├── drivers/                                # WebDriver initialization and management
+│   │   │   └── SeleniumDriverFactory.java
+│   │   ├── exceptions/                             # Custom exceptions for UI failures
+│   │   │   └── DriverInitializationException.java
+│   │   ├── screens/                                # Page object model structure (full pages)
+│   │   │   ├── base/                               # Base class for all screens
+│   │   │   │   └── BasePage.java
+│   │   │   ├── HomePage.java
+│   │   │   └── SearchResultsPage.java
 │   │   └── popups/                                 # Dialogs and overlays
 │   │       ├── LoginDialog.java
 │   │       └── TicketDetailsDialog.java
 
-│   └── utils/
+│   └── utils/                                      # Shared utilities across domains
+│       ├── api/                                    # API-specific helpers and logging
+│       │   └── ApiLogUtils.java                    # Logging and formatting for API requests/responses
+│       ├── ui/                                     # UI-specific helper classes
+│       │   ├── EnvironmentConfig.java              # Environment-based UI settings
+│       │   ├── SensitiveFieldRegistry.java         # Registry of sensitive fields for masking
+│       │   └── WaitUtils.java                      # Explicit and fluent wait utilities
 │       ├── TransferUtils.java                      # Utility for parsing transfer count from trip text
-│       └── ui/                                     # UI-specific helper classes
-│           ├── EnvironmentConfig.java
-│           ├── SensitiveFieldRegistry.java
-│           └── WaitUtils.java
+│       ├── LoginErrorTemplates.java                # Centralized login error messages and codes
+│       └── LoginResponseFields.java                # Constants for expected response fields
 
 ├── test/
-│   ├── java/                                       # Test classes and scenarios
+│   ├── java/ru/kupibilet/                          # Test classes and scenarios
 │   │   ├── api/                                    # API-level tests
-│   │   │   ├── BaseApiClient.java
-│   │   │   └── LoginApiTest.java
+│   │   │   ├── NegativeLoginApiTest.java           # Negative login test cases
+│   │   │   ├── steps/                              # Step-based API flows
+│   │   │   │   └── LoginSteps.java
+│   │   │   ├── assertions/                         # Reusable API assertions
+│   │   │   │   ├── LoginAssertions.java
+│   │   │   │   └── LoginSoftAssert.java            # Fluent-style soft assertions for login errors
+│   │   │   └── fluent/                             # Fluent-style API DSL
+│   │   │       └── FluentApiTest.java
 │   │   └── ui/                                     # UI-level tests
 │   │       ├── BaseTest.java
 │   │       ├── LoginTest.java
