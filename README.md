@@ -1,8 +1,7 @@
+
 ## Kupibilet Test Automation Framework
 
-Automated framework for UI and API testing of the Kupibilet web platform. Built using Java, Maven, JUnit 5, Selenium
-WebDriver, and Rest Assured. Designed with modular architecture for scalability, maintainability, and clear separation
-of concerns.
+A modular automation framework for UI and API testing of the Kupibilet web platform. Built with Java, Maven, JUnit 5, Selenium WebDriver, and Rest Assured. Designed for scalability, maintainability, and clear separation of concerns across layers.
 
 ---
 
@@ -128,10 +127,9 @@ resources/
 
 - Runtime parameters are managed via `EnvironmentConfig`
 - Browser type and base URL are configured in `Config` and `BrowserType`
-- Browser selection is dynamic and controlled via system property `-Dbrowser`
-- Enum `BrowserType` defines supported browsers
+- Browser selection is dynamic via system property `-Dbrowser`
 - `SeleniumDriverFactory` reads the property using `System.getProperty("browser")`
-- This allows flexible browser selection for CI and cross-browser testing
+- Supports flexible browser selection for CI and cross-browser testing
 
 Example:
 
@@ -145,8 +143,8 @@ mvn clean test -Dbrowser=firefox
 
 - Logging is implemented using SLF4J with Log4j2 binding
 - Each class defines its own static logger instance
-- Log messages are used for key lifecycle events
-- Logging configuration is defined in `resources/log4j2.xml`
+- Logs are used for key lifecycle events and API request/response tracing
+- Configuration is defined in `resources/log4j2.xml`
 
 ---
 
@@ -163,7 +161,7 @@ All UI tests inherit from `BaseTest`, which provides:
 ### Locator Strategy
 
 - Locators are defined within base classes such as `BasePage`, `BaseComponent`, and `BaseDialogComponent`
-- There is no centralized locator repository
+- There is no centralized locator repository — components are isolated and reusable
 
 ---
 
@@ -185,10 +183,12 @@ mvn -Dtest=LoginTest test
 
 ### Framework Features
 
-- **BaseTest**: provides WebDriver lifecycle management and logging
+- **BaseTest**: WebDriver lifecycle management and logging
 - **BasePage & BaseComponent**: reusable UI actions and structure
 - **Test Data Factories**: centralized generation of test inputs
-- **Modular Architecture**: separation between API, UI, domain, and test logic
+- **Fluent Assertions**: expressive checks via `LoginSoftAssert`, `FlightAssertions`
+- **Step-based API flows**: reusable logic via `LoginSteps`, `FlightSearchSteps`
+- **Modular Architecture**: clear separation between API, UI, domain, config, and utilities
 
 ---
 
