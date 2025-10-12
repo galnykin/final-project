@@ -1,4 +1,4 @@
-package ui.tests;
+package ru.kupibilet.ui.tests;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;

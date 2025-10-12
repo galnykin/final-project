@@ -1,4 +1,4 @@
-package ui.tests;
+package ru.kupibilet.ui.tests;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -13,11 +13,11 @@ import org.junit.jupiter.api.Test;
 import ru.kupibilet.testdata.FlightSearchDataFactory;
 import ru.kupibilet.ui.screens.HomePage;
 import ru.kupibilet.ui.components.SearchForm;
-import ui.assertions.FlightAssertions;
-import ui.steps.FlightSearchSteps;
+import ru.kupibilet.ui.assertions.FlightAssertions;
+import ru.kupibilet.ui.steps.FlightSearchSteps;
 
-@Epic("")
-@Feature("")
+@Epic("Flight Search")
+@Feature("Ticket Details Dialog")
 @Owner("sergey")
 @Tag("ui")
 public class FlightSearchTest extends BaseTest {

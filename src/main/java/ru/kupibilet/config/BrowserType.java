@@ -1,4 +1,4 @@
-package ru.kupibilet.ui.config;
+package ru.kupibilet.config;
 
 /**
  * Enum representing supported browser types.

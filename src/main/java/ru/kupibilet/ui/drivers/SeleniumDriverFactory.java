@@ -9,8 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.kupibilet.ui.config.BrowserType;
-import ru.kupibilet.ui.config.Config;
+import ru.kupibilet.config.BrowserConfig;
+import ru.kupibilet.config.BrowserType;
 import ru.kupibilet.ui.exceptions.DriverInitializationException;
 
 import java.time.Duration;
@@ -43,9 +43,9 @@ public class SeleniumDriverFactory {
      * Initializes the WebDriver based on the configured browser type.
      */
     private static void initDriver() {
-        BrowserType browser = Config.getBrowserType();
+        BrowserType browser = BrowserConfig.getBrowserType();
         log.info("Initializing WebDriver for browser: {}", browser);
-        log.info("Headless mode: {}, Maximized: {}", Config.isHeadless(), Config.isMaximized());
+        log.info("Headless mode: {}, Maximized: {}", BrowserConfig.isHeadless(), BrowserConfig.isMaximized());
 
         if (browser == null) {
             throw new IllegalStateException("Browser type is not specified in configuration");
@@ -67,8 +67,8 @@ public class SeleniumDriverFactory {
             }
 
             driver.get().manage().timeouts()
-                    .implicitlyWait(Duration.ofSeconds(Config.getImplicitWaitTimeout()))
-                    .pageLoadTimeout(Duration.ofSeconds(Config.getPageLoadTimeout()));
+                    .implicitlyWait(Duration.ofSeconds(BrowserConfig.getImplicitWaitTimeout()))
+                    .pageLoadTimeout(Duration.ofSeconds(BrowserConfig.getPageLoadTimeout()));
         } catch (Exception e) {
             throw new DriverInitializationException("Failed to initialize WebDriver: " + browser, e);
         }
@@ -76,7 +76,7 @@ public class SeleniumDriverFactory {
 
     private static WebDriver createChromeDriver() {
         ChromeOptions options = new ChromeOptions();
-        if (Config.isHeadless()) {
+        if (BrowserConfig.isHeadless()) {
             options.addArguments("--headless");
         }
         options.addArguments("--start-maximized");
@@ -87,18 +87,18 @@ public class SeleniumDriverFactory {
 
     private static WebDriver createFirefoxDriver() {
         FirefoxOptions options = new FirefoxOptions();
-        if (Config.isHeadless()) {
+        if (BrowserConfig.isHeadless()) {
             options.addArguments("--headless");
         }
-        options.addArguments("--width=" + Config.getBrowserWidth());
-        options.addArguments("--height=" + Config.getBrowserHeight());
+        options.addArguments("--width=" + BrowserConfig.getBrowserWidth());
+        options.addArguments("--height=" + BrowserConfig.getBrowserHeight());
         log.debug("FirefoxOptions: {}", options.asMap());
         return new FirefoxDriver(options);
     }
 
     private static WebDriver createEdgeDriver() {
         EdgeOptions options = new EdgeOptions();
-        if (Config.isHeadless()) {
+        if (BrowserConfig.isHeadless()) {
             options.addArguments("--headless");
         }
         options.addArguments("--start-maximized");

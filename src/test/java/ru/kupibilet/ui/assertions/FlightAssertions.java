@@ -1,8 +1,8 @@
-package ui.assertions;
+package ru.kupibilet.ui.assertions;
 
 import ru.kupibilet.search.dto.FlightSearchQuery;
 import ru.kupibilet.ui.popups.TicketDetailsDialog;
-import ui.steps.FlightSearchSteps;
+import ru.kupibilet.ui.steps.FlightSearchSteps;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;

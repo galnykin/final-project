@@ -1,29 +1,6 @@
-package ru.kupibilet.ui.config;
+package ru.kupibilet.config;
 
-import java.time.Duration;
-
-/**
- * Central configuration class for framework settings.
- */
-public class Config {
-
-    /**
-     * Returns the default timeout for wait operations.
-     *
-     * @return Duration of default timeout
-     */
-    public static Duration getDefaultTimeout() {
-        return Duration.ofSeconds(10);
-    }
-
-    /**
-     * Returns the extended timeout for slow environments or heavy pages.
-     *
-     * @return Duration of extended timeout
-     */
-    public static Duration getExtendedTimeout() {
-        return Duration.ofSeconds(20);
-    }
+public class BrowserConfig {
 
     /**
      * Returns the browser type from system property or default value.
@@ -33,25 +10,6 @@ public class Config {
     public static BrowserType getBrowserType() {
         String browser = System.getProperty("browser", "chrome");
         return BrowserType.fromString(browser);
-    }
-    /**
-     * Returns the implicit wait timeout in seconds.
-     * Value is read from system property "implicitWaitTimeout", default is 5.
-     *
-     * @return implicit wait timeout in seconds
-     */
-    public static long getImplicitWaitTimeout() {
-        return Long.parseLong(System.getProperty("implicitWaitTimeout", "5"));
-    }
-
-    /**
-     * Returns the page load timeout in seconds.
-     * Value is read from system property "pageLoadTimeout", default is 10.
-     *
-     * @return page load timeout in seconds
-     */
-    public static long getPageLoadTimeout() {
-        return Long.parseLong(System.getProperty("pageLoadTimeout", "10"));
     }
 
     /**
@@ -92,5 +50,25 @@ public class Config {
      */
     public static int getBrowserHeight() {
         return Integer.parseInt(System.getProperty("browserHeight", "1080"));
+    }
+
+    /**
+     * Returns the implicit wait timeout in seconds.
+     * Value is read from system property "implicitWaitTimeout", default is 5.
+     *
+     * @return implicit wait timeout in seconds
+     */
+    public static long getImplicitWaitTimeout() {
+        return Long.parseLong(System.getProperty("implicitWaitTimeout", "5"));
+    }
+
+    /**
+     * Returns the page load timeout in seconds.
+     * Value is read from system property "pageLoadTimeout", default is 10.
+     *
+     * @return page load timeout in seconds
+     */
+    public static long getPageLoadTimeout() {
+        return Long.parseLong(System.getProperty("pageLoadTimeout", "10"));
     }
 }

@@ -1,4 +1,4 @@
-package ui.steps;
+package ru.kupibilet.ui.steps;
 
 import ru.kupibilet.search.dto.FlightSearchQuery;
 import ru.kupibilet.ui.components.SearchForm;
