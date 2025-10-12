@@ -2,6 +2,7 @@ package ru.kupibilet.ui.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.kupibilet.search.dto.FlightSearchQuery;
@@ -9,12 +10,14 @@ import ru.kupibilet.ui.screens.SearchResultsPage;
 import ru.kupibilet.ui.components.base.BaseComponent;
 import ru.kupibilet.utils.ui.WaitUtils;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-public class SearchFormComponent extends BaseComponent {
+public class SearchForm extends BaseComponent {
 
-    private static final Logger log = LoggerFactory.getLogger(SearchFormComponent.class);
+    private static final Logger log = LoggerFactory.getLogger(SearchForm.class);
 
     private final By passengerSummary = By.cssSelector("[data-testid='passenger-input-container']");
     private final By fromCity = By.cssSelector("[data-testid='direction-input-from-input']");
@@ -28,7 +31,7 @@ public class SearchFormComponent extends BaseComponent {
 
     private PassengerSummaryDropdown passengerSummaryDropdown;
 
-    public SearchFormComponent(WebDriver driver) {
+    public SearchForm(WebDriver driver) {
         super(driver);
     }
 
@@ -53,7 +56,8 @@ public class SearchFormComponent extends BaseComponent {
         WaitUtils.waitUntilVisible(driver, toCityDropdown);
     }
 
-    public String getCurrentFromCity() {
+
+    public String getCurrentDepartureCity() {
         return find(fromCity).getAttribute("value");
     }
 
@@ -62,15 +66,15 @@ public class SearchFormComponent extends BaseComponent {
     }
 
     public SearchResultsPage search(FlightSearchQuery query) {
-        enterFrom(query.getFrom());
-        enterTo(query.getTo());
+        enterFrom(query.getDepartureCity());
+        enterTo(query.getArrivalCity());
         selectDepartureDate(query.getDepartureDate());
 
         openPassengerDropdown();
         getPassengerSummaryDropdown().setAdultCount(query.getPassengerCount());
-//        for (int age : query.getChildrenAges()) {
-//            getPassengerSummaryDropdown().addChildPassenger(age);
-//        }
+        for (int age : query.getChildrenAges()) {
+            getPassengerSummaryDropdown().addChildPassenger(age);
+        }
 
         clickSearch();
         return new SearchResultsPage(driver);

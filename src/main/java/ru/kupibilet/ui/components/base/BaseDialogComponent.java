@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.kupibilet.utils.ui.WaitUtils;
 
+import java.util.List;
+
 public abstract class BaseDialogComponent extends BaseComponent {
 
     public static final By ROOT = By.cssSelector("section[role='dialog'][aria-modal='true']");
@@ -20,6 +22,25 @@ public abstract class BaseDialogComponent extends BaseComponent {
 
     public BaseDialogComponent(WebDriver driver) {
         super(driver);
+    }
+    /**
+     * Finds the first element matching the given locator.
+     *
+     * @param locator the By selector
+     * @return WebElement if found
+     */
+    protected WebElement find(By locator) {
+        return driver.findElement(locator);
+    }
+
+    /**
+     * Finds all elements matching the given locator.
+     *
+     * @param locator the By selector
+     * @return list of matching WebElements
+     */
+    protected List<WebElement> findAll(By locator) {
+        return driver.findElements(locator);
     }
 
     public boolean isVisible(By rootLocator) {

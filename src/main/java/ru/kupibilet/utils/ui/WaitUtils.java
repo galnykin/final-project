@@ -10,13 +10,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.function.Predicate;
 
 /**
  * Utility class for common WebDriver wait operations.
  */
 public class WaitUtils {
 
-    private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
+    private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(15);
 
     /**
      * Waits until the specified element becomes visible on the page.
@@ -57,6 +58,15 @@ public class WaitUtils {
         }
     }
 
+    public static boolean waitUntilVisible(WebDriver driver, By locator, Duration timeout) {
+        try {
+            return new WebDriverWait(driver, timeout)
+                    .until(ExpectedConditions.visibilityOfElementLocated(locator)) != null;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
     /**
      * Waits until the specified element becomes visible on the page using a custom timeout.
      *
@@ -79,6 +89,11 @@ public class WaitUtils {
      */
     public static WebElement waitUntilClickable(WebDriver driver, By locator) {
         return new WebDriverWait(driver, DEFAULT_TIMEOUT)
+                .until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static WebElement waitUntilClickable(WebDriver driver, By locator, Duration timeout) {
+        return new WebDriverWait(driver, timeout)
                 .until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -199,4 +214,20 @@ public class WaitUtils {
         return new WebDriverWait(driver, DEFAULT_TIMEOUT)
                 .until(d -> expectedValue.equals(d.findElement(locator).getAttribute("value")));
     }
+
+    public static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Interrupted during sleep", e);
+        }
+    }
+
+//    public static void waitUntil(WebDriver driver, Predicate<WebDriver> condition, Duration timeout) {
+//        new WebDriverWait(driver, timeout)
+//                .pollingEvery(Duration.ofMillis(200))
+//                .ignoring(NoSuchElementException.class)
+//                .until(condition);
+//    }
 }
