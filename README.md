@@ -69,19 +69,23 @@ src/
 │   │   │   ├── base/                               # Base classes for components and dialogs
 │   │   │   │   ├── BaseComponent.java
 │   │   │   │   └── BaseDialogComponent.java
-│   │   │   ├── HeaderComponent.java
-│   │   │   └── TicketCardComponent.java
+│   │   │   ├── Header.java
+│   │   │   ├── TicketAirplaneCard.java
+│   │   │   ├── FlightSegment.java
+│   │   │   └── interfaces/
+│   │   │       └── Clickable.java                  # Interface for clickable UI components only
 │   │   └── popups/                                 # Dialogs and overlays
 │   │       ├── LoginDialog.java
 │   │       └── TicketDetailsDialog.java
 
 │   └── utils/
+│       ├── TransferUtils.java                      # Utility for parsing transfer count from trip text
 │       └── ui/                                     # UI-specific helper classes
 │           ├── EnvironmentConfig.java
 │           ├── SensitiveFieldRegistry.java
 │           └── WaitUtils.java
 
-├── test/          
+├── test/
 │   ├── java/                                       # Test classes and scenarios
 │   │   ├── api/                                    # API-level tests
 │   │   │   ├── BaseApiClient.java
@@ -89,7 +93,11 @@ src/
 │   │   └── ui/                                     # UI-level tests
 │   │       ├── BaseTest.java
 │   │       ├── LoginTest.java
-│   │       └── FlightSearchTest.java
+│   │       ├── FlightSearchTest.java
+│   │       ├── steps/
+│   │       │   └── FlightSearchSteps.java          # Fluent interface for flight search actions
+│   │       └── assertions/
+│   │           └── FlightAssertions.java           # Reusable assertions for flight-related checks
 
 │   └── resources/                                  # Resources for test execution
 │       └── allure.properties                       # Allure reporting configuration

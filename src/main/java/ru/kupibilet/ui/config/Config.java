@@ -93,5 +93,4 @@ public class Config {
     public static int getBrowserHeight() {
         return Integer.parseInt(System.getProperty("browserHeight", "1080"));
     }
-
 }

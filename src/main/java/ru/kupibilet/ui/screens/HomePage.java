@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.kupibilet.ui.components.SearchFormComponent;
+import ru.kupibilet.ui.components.SearchForm;
 import ru.kupibilet.ui.popups.LoginDialog;
 import ru.kupibilet.ui.screens.base.BasePage;
 import ru.kupibilet.utils.ui.WaitUtils;
@@ -14,15 +14,15 @@ public class HomePage extends BasePage {
     private static final Logger log = LoggerFactory.getLogger(HomePage.class);
     private final By loginButtonLocator = By.cssSelector("[data-testid='open-auth-modal-button']");
 
-    private final SearchFormComponent searchForm;
+    private final SearchForm searchForm;
 
     public HomePage(WebDriver driver) {
         super(driver);
         log.info("Initializing Home page");
-        searchForm = new SearchFormComponent(driver);
+        searchForm = new SearchForm(driver);
     }
 
-    public SearchFormComponent getSearchForm() {
+    public SearchForm getSearchForm() {
         return searchForm;
     }
 

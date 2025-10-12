@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.kupibilet.ui.config.BrowserType;
 import ru.kupibilet.ui.config.Config;
-import ru.kupibilet.ui.exeptions.DriverInitializationException;
+import ru.kupibilet.ui.exceptions.DriverInitializationException;
 
 import java.time.Duration;
 

@@ -1,6 +1,8 @@
 package ru.kupibilet.search.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FlightSearchQuery {
 
@@ -58,20 +60,20 @@ public class FlightSearchQuery {
         return new FlightSearchQuery(from, to, departureDate, null, passengerCount, travelClass);
     }
 
-    public static FlightSearchQuery roundTrip(String from,
-                                              String to,
+    public static FlightSearchQuery roundTrip(String departureCity,
+                                              String arrivalCity,
                                               LocalDate departureDate,
                                               LocalDate returnDate,
                                               int passengerCount,
                                               TravelClass travelClass) {
-        return new FlightSearchQuery(from, to, departureDate, returnDate, passengerCount, travelClass);
+        return new FlightSearchQuery(departureCity, arrivalCity, departureDate, returnDate, passengerCount, travelClass);
     }
 
-    public String getFrom() {
+    public String getDepartureCity() {
         return from;
     }
 
-    public String getTo() {
+    public String getArrivalCity() {
         return to;
     }
 
@@ -89,5 +91,11 @@ public class FlightSearchQuery {
 
     public TravelClass getTravelClass() {
         return travelClass;
+
+    }
+
+    //TODO
+    public List<Integer> getChildrenAges() {
+        return new ArrayList<>();
     }
 }
