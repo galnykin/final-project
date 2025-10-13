@@ -6,22 +6,31 @@ import ru.kupibilet.ui.popups.TicketDetailsDialog;
 import ru.kupibilet.ui.screens.SearchResultsPage;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  * Fluent interface for performing flight search steps in UI tests.
  * Encapsulates the search form, query parameters, search results, and ticket details.
  */
 public class FlightSearchSteps {
 
-    /** Reference to the search form page object */
+    /**
+     * Reference to the search form page object
+     */
     private final SearchForm searchForm;
 
-    /** Search query containing origin and destination cities */
+    /**
+     * Search query containing origin and destination cities
+     */
     private FlightSearchQuery query;
 
-    /** Page object representing the search results */
+    /**
+     * Page object representing the search results
+     */
     private SearchResultsPage results;
 
-    /** Dialog component showing ticket details */
+    /**
+     * Dialog component showing ticket details
+     */
     private TicketDetailsDialog details;
 
     /**
@@ -80,13 +89,13 @@ public class FlightSearchSteps {
      * Performs a flight search using the specified departure and arrival cities.
      *
      * @param from the departure city
-     * @param to the arrival city
+     * @param to   the arrival city
      * @return the current instance of FlightSearchSteps for method chaining
      * @throws AssertionError if no ticket cards are found in the search results
      */
     public FlightSearchSteps searchFromTo(String from, String to) {
         this.query = FlightSearchQuery.fromTo(from, to);
-        this.results = searchForm.search(query.getArrivalCity());
+        this.results = searchForm.search(query.getDepartureCity(), query.getArrivalCity());
         assertTrue(results.hasTicketCards(), "Expected at least one ticket card");
         return this;
     }

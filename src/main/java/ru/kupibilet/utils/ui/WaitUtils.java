@@ -224,10 +224,12 @@ public class WaitUtils {
         }
     }
 
-//    public static void waitUntil(WebDriver driver, Predicate<WebDriver> condition, Duration timeout) {
-//        new WebDriverWait(driver, timeout)
-//                .pollingEvery(Duration.ofMillis(200))
-//                .ignoring(NoSuchElementException.class)
-//                .until(condition);
-//    }
+    public static void waitUntilAttributeNotEmpty(WebDriver driver, By locator, String attribute) {
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(d -> {
+            WebElement element = d.findElement(locator);
+            String value = element.getAttribute(attribute);
+            return value != null && !value.trim().isEmpty();
+        });
+    }
+
 }

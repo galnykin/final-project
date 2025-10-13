@@ -1,6 +1,7 @@
 package ru.kupibilet.ui.components;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -44,6 +45,22 @@ public class SearchForm extends BaseComponent {
 
     public void openPassengerDropdown() {
         click(passengerSummary);
+    }
+
+    protected void type(By locator, String text) {
+        WebElement element = driver.findElement(locator);
+
+        element.click();
+        element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        element.sendKeys(Keys.DELETE);
+
+        String currentValue = element.getAttribute("value");
+        if (currentValue != null && !currentValue.isEmpty()) {
+            element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            element.sendKeys(Keys.DELETE);
+        }
+
+        element.sendKeys(text);
     }
 
     private void enterFrom(String cityName) {
@@ -95,8 +112,8 @@ public class SearchForm extends BaseComponent {
     }
 
     public SearchResultsPage search(String from, String to) {
-        enterFrom(from);
         enterTo(to);
+        enterFrom(from);
         clickSearch();
         return new SearchResultsPage(driver);
     }
