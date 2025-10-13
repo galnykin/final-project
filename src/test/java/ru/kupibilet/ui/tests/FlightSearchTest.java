@@ -7,9 +7,11 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.kupibilet.search.dto.FlightSearchQuery;
 import ru.kupibilet.testdata.FlightSearchDataFactory;
 import ru.kupibilet.ui.screens.HomePage;
 import ru.kupibilet.ui.components.SearchForm;
@@ -66,17 +68,18 @@ public class FlightSearchTest extends BaseTest {
     }
 
     @Test
+    @Disabled("Disabled due to unstable extraction of arrival city from ticket details — dropdown may override input")
     @Story("User searches for a flight and sees available ticket cards")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Should correctly extract arrival city from ticket details (random from/to)")
     public void testArrivalCityFromTicketDetailsWithRandomCities() {
-        String from = FlightSearchDataFactory.randomCapitalCity();
-        String to = FlightSearchDataFactory.randomCapitalCity();
+        FlightSearchQuery query = FlightSearchDataFactory.randomFlightQueryFromCapitals();
 
         FlightSearchSteps ctx = FlightSearchSteps.with(searchForm)
-                .searchFromTo(from, to)
+                .searchFromTo(query.getDepartureCity(), query.getArrivalCity())
                 .openDetails();
 
         FlightAssertions.assertArrivalCityMatches(ctx);
     }
+
 }

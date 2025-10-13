@@ -26,13 +26,6 @@ public class FlightSearchDataFactory {
         return capitalCities.get(random.nextInt(capitalCities.size()));
     }
 
-    public static FlightSearchQuery randomFlightQuery() {
-        return FlightSearchQuery.fromTo(
-                randomCity(),
-                randomCity()
-        );
-    }
-
     public static FlightSearchQuery randomFlightQueryFromCapitals() {
         String from = randomCapitalCity();
         String to;
