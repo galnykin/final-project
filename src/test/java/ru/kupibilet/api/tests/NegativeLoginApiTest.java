@@ -108,9 +108,6 @@ public class NegativeLoginApiTest extends BaseApiTest {
         );
 
         Response response = authClient.login(request);
-        log.info("[testLoginWithEmailMissingAtSymbol_expectedBehavior] Response:\n{}",
-                response.getBody().asPrettyString());
-
         LoginSoftAssert.softAssert(response)
                 .shouldMatchInvalidEmailFormatError()
                 .verify();
